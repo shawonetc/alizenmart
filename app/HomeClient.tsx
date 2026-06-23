@@ -156,8 +156,8 @@ export default function HomeClient({ initialProducts, initialSettings }: HomeCli
             settings?.hero_main_slider_2 || "/images/hero/speedbazar.jpeg",
             settings?.hero_main_slider_3 || "/images/hero/speedbazar.jpeg"
           ]}
-          sideBanner1={settings?.hero_side_banner_1}
-          sideBanner2={settings?.hero_side_banner_2}
+          sideBanner1={settings?.hero_side_banner_1 || "/images/hero/ads.png"}
+          sideBanner2={settings?.hero_side_banner_2 || "/images/hero/ads2.png"}
         />
 
         {/* Flash Sale Section */}

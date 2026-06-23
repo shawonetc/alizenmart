@@ -11,8 +11,8 @@ interface HeroProps {
 
 const Hero = ({
   mainSliders = ["/images/hero/speedbazar.jpeg", "/images/hero/speedbazar.jpeg", "/images/hero/speedbazar.jpeg"],
-  sideBanner1 = "/side_banner_1.png",
-  sideBanner2 = "/side_banner_1.png",
+  sideBanner1 = "/images/hero/ads.png",
+  sideBanner2 = "/images/hero/ads2.png",
 }: HeroProps) => {
   const [currentSlide, setCurrentSlide] = useState(0);
 
