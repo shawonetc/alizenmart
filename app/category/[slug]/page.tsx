@@ -59,14 +59,14 @@ export async function generateMetadata(
 
   return {
     title: `${categoryName} - Buy Online at Best Price in Bangladesh`,
-    description: `Shop the latest ${categoryName} online at Fabrico Fashion. Discover premium quality clothing, fashion apparel, and accessories in Bangladesh.`,
+    description: `Shop the latest ${categoryName} online at Speed Bazar. Discover premium quality clothing, fashion apparel, and accessories in Bangladesh.`,
     alternates: {
       canonical: `/category/${decodedSlug}`,
     },
     openGraph: {
-      title: `${categoryName} | Fabrico Fashion`,
-      description: `Shop the latest ${categoryName} online at Fabrico Fashion. Discover premium quality clothing and lifestyle items in Bangladesh.`,
-      url: `https://fabricofashion.com/category/${decodedSlug}`,
+      title: `${categoryName} | Speed Bazar`,
+      description: `Shop the latest ${categoryName} online at Speed Bazar. Discover premium quality clothing and lifestyle items in Bangladesh.`,
+      url: `https://speedbazar.com/category/${decodedSlug}`,
     }
   };
 }
@@ -100,7 +100,7 @@ export default async function CategoryPage({ params }: Props) {
   const products = await getCategoryProducts(categoryName);
 
   // Schema Markup: ItemList and BreadcrumbList for categories
-  const sitemapUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://fabricofashion.com";
+  const sitemapUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://speedbazar.com";
   
   const breadcrumbSchema = {
     "@context": "https://schema.org",

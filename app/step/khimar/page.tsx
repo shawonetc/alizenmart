@@ -255,7 +255,7 @@ export default function ShirtLandingPage() {
         <div className="max-w-[1200px] mx-auto px-4 flex justify-between items-center">
           <Link href="/" className="flex items-center gap-2 group">
             <span className="font-black text-2xl tracking-wider text-white uppercase group-hover:text-amber-400 transition-colors">
-              FABRICO <span className="text-amber-400">FASHION</span>
+              SPEED <span className="text-amber-400">BAZAR</span>
             </span>
           </Link>
           <button
@@ -340,7 +340,7 @@ export default function ShirtLandingPage() {
                 </button>
                 <div className="text-slate-400 font-bold text-sm flex items-center gap-1.5">
                   <HugeiconsIcon icon={CallIcon} size={18} className="text-amber-400" />
-                  <span>হটলাইন: <a href="tel:01518486910" className="text-white hover:text-amber-400">01518486910</a></span>
+                   <span>হটলাইন: <a href="tel:01771680742" className="text-white hover:text-amber-400">01771680742</a></span>
                 </div>
               </div>
             </div>
@@ -887,7 +887,7 @@ export default function ShirtLandingPage() {
                         <p className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">
                           {paymentMethod.toUpperCase()} Personal Number
                         </p>
-                        <p className="text-sm font-extrabold text-amber-400 mt-0.5">01518486910</p>
+                        <p className="text-sm font-extrabold text-amber-400 mt-0.5">01771680742</p>
                       </div>
                       <span className="bg-emerald-500/10 text-emerald-400 text-[10px] font-bold px-2 py-0.5 rounded">Active</span>
                     </div>
@@ -1098,11 +1098,11 @@ export default function ShirtLandingPage() {
 
       {/* Footer Info */}
       <footer className="bg-slate-950 text-slate-500 py-10 border-t border-slate-900 text-center text-xs space-y-4">
-        <p className="font-extrabold text-sm text-white">FABRICO FASHION</p>
+        <p className="font-extrabold text-sm text-white">SPEED BAZAR</p>
         <p className="max-w-md mx-auto leading-relaxed">
           আমাদের প্রোডাক্টের সাইজ পরিবর্তন বা পলিসি সম্পর্কে যেকোনো সাহায্য পেতে সরাসরি যোগাযোগ করুন আমাদের হটলাইন নম্বরে।
         </p>
-        <p>Copyright © 2026 Fabrico Fashion. All Rights Reserved.</p>
+        <p>Copyright © 2026 Speed Bazar. All Rights Reserved.</p>
       </footer>
 
       {/* Success Modal */}

@@ -152,9 +152,9 @@ export default function HomeClient({ initialProducts, initialSettings }: HomeCli
       <main className="flex-1 pb-20 md:pb-12">
         <Hero
           mainSliders={[
-            settings?.hero_main_slider || "/hero_banner_1.png",
-            settings?.hero_main_slider_2 || "/hero_banner_1.png",
-            settings?.hero_main_slider_3 || "/hero_banner_1.png"
+            settings?.hero_main_slider || "/images/hero/speedbazar.jpeg",
+            settings?.hero_main_slider_2 || "/images/hero/speedbazar.jpeg",
+            settings?.hero_main_slider_3 || "/images/hero/speedbazar.jpeg"
           ]}
           sideBanner1={settings?.hero_side_banner_1}
           sideBanner2={settings?.hero_side_banner_2}

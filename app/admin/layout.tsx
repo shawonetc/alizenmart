@@ -43,7 +43,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
       const adminEmails = [
         "blackrisebd@gmail.com",
-        "admin@fabricofashion.com",
+        "admin@speedbazar.com",
         "fabricofashionn@gmail.com",
       ];
       const email = String(currentUser.email || "").toLowerCase();
@@ -111,8 +111,8 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
             <div className="flex items-center gap-2">
               <div className="relative h-8 w-28">
                 <Image 
-                  src="/logo/logo1.png" 
-                  alt="Fabrico Admin Logo" 
+                  src="/logo/logo1_sb.png" 
+                  alt="Speed Bazar Admin Logo" 
                   fill
                   sizes="112px"
                   className="object-contain object-left" 
@@ -125,7 +125,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
             </div>
           ) : (
             <div className="w-9 h-9 bg-gradient-to-tr from-[#FF5722] to-orange-400 rounded-xl flex items-center justify-center text-white font-black text-xl shadow-md mx-auto">
-              F
+              S
             </div>
           )}
         </div>

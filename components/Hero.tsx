@@ -10,7 +10,7 @@ interface HeroProps {
 }
 
 const Hero = ({
-  mainSliders = ["/hero_banner_1.png", "/hero_banner_1.png", "/hero_banner_1.png"],
+  mainSliders = ["/images/hero/speedbazar.jpeg", "/images/hero/speedbazar.jpeg", "/images/hero/speedbazar.jpeg"],
   sideBanner1 = "/side_banner_1.png",
   sideBanner2 = "/side_banner_1.png",
 }: HeroProps) => {

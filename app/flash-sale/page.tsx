@@ -7,8 +7,8 @@ import Link from "next/link";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Flash Sale - Limited Time Deals & Discounts | Fabrico Fashion",
-  description: "Shop Fabrico Fashion's exclusive Flash Sale! Save big on high-quality premium clothing, panjabi, embroidery designs, and lifestyle items with special deals in Bangladesh.",
+  title: "Flash Sale - Limited Time Deals & Discounts | Speed Bazar",
+  description: "Shop Speed Bazar's exclusive Flash Sale! Save big on high-quality premium clothing, panjabi, embroidery designs, and lifestyle items with special deals in Bangladesh.",
   alternates: {
     canonical: "/flash-sale",
   },
@@ -51,7 +51,7 @@ export default async function FlashSalePage() {
   const flashSaleList = products.length > 0 ? products : defaultFlashSale;
 
   // Breadcrumbs schema markup
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://fabricofashion.com";
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://speedbazar.com";
   const breadcrumbSchema = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",

@@ -96,8 +96,8 @@ const Header = () => {
           <Link href="/" className="flex items-center" onClick={() => setIsDrawerOpen(false)}>
             <div className="relative h-8 w-28">
               <Image 
-                src="/logo/logo1.png" 
-                alt="Fabrico Fashion Logo" 
+                src="/logo/logo1_sb.png" 
+                alt="Speed Bazar Logo" 
                 fill
                 sizes="112px"
                 className="object-contain" 
@@ -143,7 +143,7 @@ const Header = () => {
         {/* Drawer Footer */}
         <div className="p-4 border-t border-gray-100 text-center">
           <p className="text-[10px] text-gray-400 uppercase tracking-widest font-bold">
-            All Rights Reserved by Fabrico Fashion
+            All Rights Reserved by Speed Bazar
           </p>
         </div>
       </div>
@@ -166,8 +166,8 @@ const Header = () => {
             <Link href="/" className="flex-shrink-0 md:flex-none absolute left-1/2 -translate-x-1/2 md:relative md:left-0 md:translate-x-0">
               <div className="relative h-8 md:h-10 w-32 md:w-40 flex items-center">
                 <Image 
-                  src="/logo/logo1.png" 
-                  alt="Fabrico Fashion Logo" 
+                  src="/logo/logo1_sb.png" 
+                  alt="Speed Bazar Logo" 
                   fill
                   sizes="(max-width: 768px) 128px, 160px"
                   className="object-contain object-left md:object-center" 

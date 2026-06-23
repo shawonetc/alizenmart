@@ -13,16 +13,16 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://fabricofashion.com"),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://speedbazar.com"),
   title: {
-    default: "Fabrico Fashion - Best Premium Fashion & Lifestyle in Bangladesh",
-    template: "%s | Fabrico Fashion",
+    default: "Speed Bazar - Best Premium Fashion & Lifestyle in Bangladesh",
+    template: "%s | Speed Bazar",
   },
-  description: "Explore Fabrico Fashion for premium clothing, high-quality panjabi, embroidery designs, gadgets, smart electronics, home & lifestyle products in Bangladesh.",
-  keywords: ["e-commerce", "online shopping", "Bangladesh", "fashion", "lifestyle", "panjabi", "premium clothing", "Fabrico Fashion"],
-  authors: [{ name: "Fabrico Fashion Team" }],
-  creator: "Fabrico Fashion",
-  publisher: "Fabrico Fashion",
+  description: "Explore Speed Bazar for premium clothing, high-quality panjabi, embroidery designs, gadgets, smart electronics, home & lifestyle products in Bangladesh.",
+  keywords: ["e-commerce", "online shopping", "Bangladesh", "fashion", "lifestyle", "panjabi", "premium clothing", "Speed Bazar"],
+  authors: [{ name: "Speed Bazar Team" }],
+  creator: "Speed Bazar",
+  publisher: "Speed Bazar",
   robots: {
     index: true,
     follow: true,
@@ -37,23 +37,23 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://fabricofashion.com",
-    siteName: "Fabrico Fashion",
-    title: "Fabrico Fashion - Best Premium Fashion & Lifestyle in Bangladesh",
-    description: "Explore Fabrico Fashion for premium clothing, high-quality panjabi, embroidery designs, gadgets, and lifestyle items in Bangladesh.",
+    url: "https://speedbazar.com",
+    siteName: "Speed Bazar",
+    title: "Speed Bazar - Best Premium Fashion & Lifestyle in Bangladesh",
+    description: "Explore Speed Bazar for premium clothing, high-quality panjabi, embroidery designs, gadgets, and lifestyle items in Bangladesh.",
     images: [
       {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Fabrico Fashion - Premium Shopping Hub",
+        alt: "Speed Bazar - Premium Shopping Hub",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Fabrico Fashion - Best Premium Fashion & Lifestyle in Bangladesh",
-    description: "Explore Fabrico Fashion for premium clothing, high-quality panjabi, embroidery designs, gadgets, and lifestyle items.",
+    title: "Speed Bazar - Best Premium Fashion & Lifestyle in Bangladesh",
+    description: "Explore Speed Bazar for premium clothing, high-quality panjabi, embroidery designs, gadgets, and lifestyle items.",
     images: ["/og-image.png"],
   },
   alternates: {

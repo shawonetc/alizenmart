@@ -14,8 +14,8 @@ export async function generateMetadata({ searchParams }: Props): Promise<Metadat
   const { q } = await searchParams;
   const queryText = q || "";
   return {
-    title: queryText ? `Search results for "${queryText}" | Fabrico Fashion` : "Search Products | Fabrico Fashion",
-    description: `Search premium clothing, apparel, gadgets, and lifestyle items at Fabrico Fashion Bangladesh.`,
+    title: queryText ? `Search results for "${queryText}" | Speed Bazar` : "Search Products | Speed Bazar",
+    description: `Search premium clothing, apparel, gadgets, and lifestyle items at Speed Bazar Bangladesh.`,
   };
 }
 

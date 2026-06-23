@@ -4,8 +4,8 @@ import HomeClient from "../HomeClient";
 
 // Metadata for homepage
 export const metadata = {
-  title: "Fabrico Fashion - Best Premium Fashion & Lifestyle in Bangladesh",
-  description: "Explore Fabrico Fashion for premium clothing, high-quality panjabi, embroidery designs, gadgets, smart electronics, home & lifestyle products in Bangladesh.",
+  title: "Speed Bazar - Best Premium Fashion & Lifestyle in Bangladesh",
+  description: "Explore Speed Bazar for premium clothing, high-quality panjabi, embroidery designs, gadgets, smart electronics, home & lifestyle products in Bangladesh.",
 };
 
 // Server-side cached query with "use cache" directive
@@ -46,22 +46,22 @@ export default async function Home() {
     {
       "@context": "https://schema.org",
       "@type": "WebSite",
-      "name": "Fabrico Fashion",
-      "url": "https://fabricofashion.com",
+      "name": "Speed Bazar",
+      "url": "https://speedbazar.com",
       "potentialAction": {
         "@type": "SearchAction",
-        "target": "https://fabricofashion.com/categories?q={search_term_string}",
+        "target": "https://speedbazar.com/categories?q={search_term_string}",
         "query-input": "required name=search_term_string"
       }
     },
     {
       "@context": "https://schema.org",
       "@type": "Organization",
-      "name": "Fabrico Fashion",
-      "url": "https://fabricofashion.com",
-      "logo": "https://fabricofashion.com/favicon.ico",
+      "name": "Speed Bazar",
+      "url": "https://speedbazar.com",
+      "logo": "https://speedbazar.com/favicon.ico",
       "sameAs": [
-        "https://www.facebook.com/fabricofashion"
+        "https://www.facebook.com/speedbazar"
       ],
       "contactPoint": {
         "@type": "ContactPoint",

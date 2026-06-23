@@ -470,8 +470,8 @@ export default function KhimarLandingPage() {
           <Link href="/" className="flex items-center gap-2">
             <div className="relative h-8 md:h-10 w-32 md:w-40">
               <Image 
-                src="/logo/logo1.png" 
-                alt="Fabrico Fashion Logo" 
+                src="/logo/logo1_sb.png" 
+                alt="Speed Bazar Logo" 
                 fill 
                 className="object-contain object-left" 
                 priority 
@@ -1186,8 +1186,8 @@ export default function KhimarLandingPage() {
       <footer className="bg-slate-900 text-slate-400 py-10 text-center text-xs space-y-4">
         <div className="relative h-8 w-32 mx-auto">
           <Image 
-            src="/logo/logo2.png" 
-            alt="Fabrico Fashion Logo" 
+            src="/logo/logo2_sb.png" 
+            alt="Speed Bazar Logo" 
             fill 
             className="object-contain brightness-0 invert" 
           />
@@ -1195,7 +1195,7 @@ export default function KhimarLandingPage() {
         <p className="max-w-md mx-auto leading-relaxed text-slate-550">
           আমাদের প্রোডাক্টের সাইজ পরিবর্তন বা পলিসি সম্পর্কে যেকোনো সাহায্য পেতে সরাসরি যোগাযোগ করুন আমাদের হটলাইন নম্বরে।
         </p>
-        <p className="text-slate-600">Copyright © 2026 Fabrico Fashion. All Rights Reserved.</p>
+        <p className="text-slate-600">Copyright © 2026 Speed Bazar. All Rights Reserved.</p>
       </footer>
 
       {/* Success Modal */}

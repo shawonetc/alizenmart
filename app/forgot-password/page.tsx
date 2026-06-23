@@ -44,8 +44,8 @@ export default function ForgotPasswordPage() {
           <div className="bg-[#1a80c2] p-8 text-center flex flex-col items-center">
             <div className="relative h-10 w-36 mb-2">
               <Image 
-                src="/logo/logo2.png" 
-                alt="Fabrico Fashion Logo" 
+                src="/logo/logo2_sb.png" 
+                alt="Speed Bazar Logo" 
                 fill
                 sizes="144px"
                 className="object-contain" 
