@@ -11,9 +11,28 @@ if (typeof process.loadEnvFile === 'function') {
 }
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY;
 
 const supabase = createClient(supabaseUrl, supabaseAnonKey);
+
+const defaultStaticCategories = [
+    { name: "Gadgets", slug: "gadgets", sort_order: 1 },
+    { name: "Smart Electronics", slug: "smart-electronics", sort_order: 2 },
+    { name: "Home & Lifestyle", slug: "home-lifestyle", sort_order: 3 },
+    { name: "Beauty & Personal", slug: "beauty-personal", sort_order: 4 },
+    { name: "Healthy Food", slug: "healthy-food", sort_order: 5 },
+    { name: "Fashion", slug: "fashion", sort_order: 6 },
+    { name: "Mom & Baby", slug: "mom-baby", sort_order: 7 },
+    { name: "Home & Kitchen", slug: "home-kitchen", sort_order: 8 },
+    { name: "Appliances", slug: "appliances", sort_order: 9 },
+    { name: "Fitness & Health", slug: "fitness-health", sort_order: 10 },
+    { name: "Smart Watch", slug: "smart-watch", sort_order: 11 },
+    { name: "Religious", slug: "religious", sort_order: 12 },
+    { name: "Peripherals", slug: "peripherals", sort_order: 13 },
+    { name: "Smart Furniture", slug: "smart-furniture", sort_order: 14 },
+    { name: "Books", slug: "books", sort_order: 15 },
+    { name: "Others", slug: "others", sort_order: 16 }
+];
 
 const products = [
     { title: "Airpods Case", price: 160, oldPrice: 180, image: "/airpods_case.png", category: "Gadgets", stock: 50, description: "High quality Airpods case." },
@@ -35,19 +54,45 @@ const products = [
 ];
 
 async function seed() {
-    console.log("Seeding products...");
+    console.log("1. Seeding categories...");
+    for (const cat of defaultStaticCategories) {
+        const { error } = await supabase.from('categories').upsert([cat], { onConflict: 'slug' });
+        if (error) {
+            console.error('Error inserting category', cat.name, error);
+        } else {
+            console.log('Category seeded:', cat.name);
+        }
+    }
+
+    console.log("\n2. Seeding settings...");
+    const { error: settingsError } = await supabase.from('settings').upsert([{
+        id: 1,
+        hero_main_slider: "/ads.png",
+        hero_main_slider_2: "/ads2.png",
+        hero_main_slider_3: "",
+        hero_side_banner_1: "",
+        hero_side_banner_2: "",
+        updated_at: new Date().toISOString()
+    }]);
+    if (settingsError) {
+        console.error('Error seeding settings:', settingsError);
+    } else {
+        console.log('Default settings seeded successfully.');
+    }
+
+    console.log("\n3. Seeding products...");
     for (const product of products) {
         const { error } = await supabase.from('products').insert([{
             ...product,
             created_at: new Date().toISOString()
         }]);
         if (error) {
-            console.error('Error inserting', product.title, error);
+            console.error('Error inserting product:', product.title, error);
         } else {
-            console.log('Inserted', product.title);
+            console.log('Inserted product:', product.title);
         }
     }
-    console.log("Seeding complete.");
+    console.log("\nSeeding process completed.");
 }
 
 seed();

@@ -4,8 +4,10 @@ const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL && process.env.NEXT_PUB
   ? process.env.NEXT_PUBLIC_SUPABASE_URL 
   : 'https://placeholder-project.supabase.co'
 
-const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY && process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY !== 'your_supabase_anon_key'
-  ? process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY 
+const rawAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY;
+const supabaseAnonKey = rawAnonKey && rawAnonKey !== 'your_supabase_anon_key' && rawAnonKey !== 'your_supabase_publishable_key'
+  ? rawAnonKey 
   : 'placeholder-key'
 
 export const supabase = createClient(supabaseUrl, supabaseAnonKey)
+
