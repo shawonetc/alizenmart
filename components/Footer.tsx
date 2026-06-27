@@ -20,18 +20,18 @@ const Footer = () => {
             
             {/* Column 1 - Brand Info */}
             <div className="space-y-4">
-              <div className="relative h-10 w-36">
+              <div className="relative h-14 w-14">
                 <Image 
-                  src="/logo/logo2.png" 
-                  alt="Fabrico Fashion Logo" 
+                  src="/logo/logo3.jpeg" 
+                  alt="1stopDokan Logo" 
                   fill
-                  sizes="144px"
+                  sizes="56px"
                   className="object-contain object-left" 
                   priority
                 />
               </div>
               <p className="text-[#0c4063] text-xs md:text-sm leading-relaxed font-medium pr-2">
-                Fabrico Fashion is your trusted online shopping destination for premium apparel and accessories. We bring you high-quality products, smart fashion deals, and reliable service all in one place.
+                1stopdokan.com is your trusted online shopping destination for premium apparel and accessories. We bring you high-quality products, smart fashion deals, and reliable service all in one place.
               </p>
               
               {/* Circular Social Icons */}
@@ -47,7 +47,7 @@ const Footer = () => {
                   </svg>
                 </Link>
                 <Link 
-                  href="https://wa.me/8801518486910" 
+                  href="https://wa.me/8801534694518" 
                   target="_blank"
                   className="w-9 h-9 rounded-full bg-black flex items-center justify-center hover:bg-[#FF5722] hover:scale-105 active:scale-95 transition-all shadow-sm"
                   title="WhatsApp"
@@ -83,7 +83,7 @@ const Footer = () => {
                   <svg className="w-5 h-5 text-[#0a3a5a] flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 0 0 2.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.387a12.035 12.035 0 0 1-7.108-7.108c-.157-.44.009-.927.387-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 0 0-1.091-.852H4.5A2.25 2.25 0 0 0 2.25 4.5v2.25z" />
                   </svg>
-                  <span className="text-[#0c4063] font-medium text-xs md:text-sm">01518-486910</span>
+                  <span className="text-[#0c4063] font-medium text-xs md:text-sm">01534694518</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <svg className="w-5 h-5 text-[#0a3a5a] mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
@@ -91,7 +91,7 @@ const Footer = () => {
                     <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0z" />
                   </svg>
                   <span className="text-[#0c4063] font-medium text-xs md:text-sm leading-relaxed">
-                    Gulshan, Dhaka, Bangladesh
+                    Paharpur, Badalgachi, Naogaon
                   </span>
                 </li>
                 <li className="flex items-center gap-3">
@@ -132,14 +132,14 @@ const Footer = () => {
       {/* Footer Bottom copyright Bar */}
       <div className="bg-[#eaeaea] py-4 border-t border-gray-200">
         <p className="text-center text-xs md:text-sm font-bold text-gray-700">
-          Copyright © {year} Fabrico Fashion
+          Copyright © {year} 1stopdokan.com
         </p>
       </div>
  
       {/* Floating chat bubble on bottom right */}
       <div className="fixed bottom-28 md:bottom-6 right-6 z-40">
         <Link 
-          href="https://wa.me/8801518486910" 
+          href="https://wa.me/8801534694518" 
           target="_blank"
           className="w-12 h-12 md:w-14 md:h-14 bg-[#FF5722] hover:bg-[#E64A19] hover:scale-105 active:scale-95 transition-all text-white rounded-full flex items-center justify-center shadow-lg cursor-pointer"
           aria-label="Chat with Us"

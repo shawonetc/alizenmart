@@ -482,11 +482,12 @@ export default function KhimarLandingPage() {
       <header className="bg-white border-b border-gray-100 py-4 sticky top-0 z-40 backdrop-blur-md bg-white/95 shadow-sm">
         <div className="max-w-[1200px] mx-auto px-4 flex justify-between items-center">
           <Link href="/" className="flex items-center gap-2">
-            <div className="relative h-8 md:h-10 w-32 md:w-40">
+            <div className="relative h-12 md:h-14 w-12 md:w-14">
               <Image 
-                src="/logo/logo1.png" 
-                alt="Fabrico Fashion Logo" 
+                src="/logo/logo3.jpeg" 
+                alt="1stopDokan Logo" 
                 fill 
+                sizes="(max-width: 768px) 48px, 56px"
                 className="object-contain object-left" 
                 priority 
               />
@@ -582,7 +583,7 @@ export default function KhimarLandingPage() {
                 </button>
                 <div className="text-slate-500 font-bold text-sm flex items-center gap-1.5">
                   <HugeiconsIcon icon={CallIcon} size={18} className="text-[#0B5A70]" />
-                  <span>হটলাইন: <a href="tel:01791764444" className="text-[#0B5A70] hover:text-[#FF5722] transition-colors">01791764444</a></span>
+                  <span>হটলাইন: <a href="tel:01534694518" className="text-[#0B5A70] hover:text-[#FF5722] transition-colors">01534694518</a></span>
                 </div>
               </div>
             </ScrollReveal>
@@ -975,7 +976,7 @@ export default function KhimarLandingPage() {
                         <p className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">
                           {paymentMethod.toUpperCase()} Personal Number
                         </p>
-                        <p className="text-sm font-extrabold text-[#0B5A70] mt-0.5">01791764444</p>
+                        <p className="text-sm font-extrabold text-[#0B5A70] mt-0.5">01534694518</p>
                       </div>
                       <span className="bg-emerald-100 text-emerald-600 text-[10px] font-bold px-2.5 py-0.5 rounded">Active</span>
                     </div>

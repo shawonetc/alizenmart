@@ -340,7 +340,7 @@ export default function ShirtLandingPage() {
                 </button>
                 <div className="text-slate-400 font-bold text-sm flex items-center gap-1.5">
                   <HugeiconsIcon icon={CallIcon} size={18} className="text-amber-400" />
-                  <span>হটলাইন: <a href="tel:01518486910" className="text-white hover:text-amber-400">01518486910</a></span>
+                  <span>হটলাইন: <a href="tel:01534694518" className="text-white hover:text-amber-400">01534694518</a></span>
                 </div>
               </div>
             </div>
@@ -887,7 +887,7 @@ export default function ShirtLandingPage() {
                         <p className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">
                           {paymentMethod.toUpperCase()} Personal Number
                         </p>
-                        <p className="text-sm font-extrabold text-amber-400 mt-0.5">01518486910</p>
+                        <p className="text-sm font-extrabold text-amber-400 mt-0.5">01534694518</p>
                       </div>
                       <span className="bg-emerald-500/10 text-emerald-400 text-[10px] font-bold px-2 py-0.5 rounded">Active</span>
                     </div>

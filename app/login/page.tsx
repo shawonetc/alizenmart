@@ -43,12 +43,12 @@ export default function LoginPage() {
       <main className="flex-1 flex items-center justify-center py-10 md:py-20 px-4">
         <div className="w-full max-w-md bg-white rounded-xl shadow-xl border border-gray-100 overflow-hidden">
           <div className="bg-[#1a80c2] p-8 text-center flex flex-col items-center">
-            <div className="relative h-10 w-36 mb-2">
+            <div className="relative h-16 w-16 mb-2">
               <Image 
-                src="/logo/logo2.png" 
-                alt="Fabrico Fashion Logo" 
+                src="/logo/logo3.jpeg" 
+                alt="1stopDokan Logo" 
                 fill
-                sizes="144px"
+                sizes="64px"
                 className="object-contain" 
                 priority
               />

@@ -7,8 +7,8 @@ import Link from "next/link";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Featured Products - Premium Deals & Top Picks | Fabrico Fashion",
-  description: "Shop Fabrico Fashion's exclusive featured products. Discover premium-quality clothing, high-quality panjabi, embroidery designs, gadgets, and lifestyle items at unbeatable prices in Bangladesh.",
+  title: "Featured Products - Premium Deals & Top Picks | 1stopDokan",
+  description: "Shop 1stopDokan's exclusive featured products. Discover premium-quality clothing, high-quality panjabi, embroidery designs, gadgets, and lifestyle items at unbeatable prices in Bangladesh.",
   alternates: {
     canonical: "/featured",
   },
@@ -57,7 +57,7 @@ export default async function FeaturedProductsPage() {
   const featuredList = products.length > 0 ? products : defaultFeatured;
 
   // Breadcrumbs schema markup
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://fabricofashion.com";
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://1stopdokan.com";
   const breadcrumbSchema = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",

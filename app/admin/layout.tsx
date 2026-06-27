@@ -43,8 +43,8 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
       const adminEmails = [
         "blackrisebd@gmail.com",
-        "admin@fabricofashion.com",
-        "fabricofashionn@gmail.com",
+        "admin@1stopdokan.com",
+        "1stopdokan@gmail.com",
       ];
       const email = String(currentUser.email || "").toLowerCase();
       const isWhitelisted = 
@@ -109,12 +109,12 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         <div className="p-6 flex items-center gap-2 border-b border-gray-50 h-20">
           {isSidebarOpen ? (
             <div className="flex items-center gap-2">
-              <div className="relative h-8 w-28">
+              <div className="relative h-12 w-12">
                 <Image 
-                  src="/logo/logo1.png" 
-                  alt="Fabrico Admin Logo" 
+                  src="/logo/logo3.jpeg" 
+                  alt="1stopDokan Admin Logo" 
                   fill
-                  sizes="112px"
+                  sizes="48px"
                   className="object-contain object-left" 
                   priority
                 />

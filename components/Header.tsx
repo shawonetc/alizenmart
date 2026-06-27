@@ -109,18 +109,16 @@ const Header = () => {
   return (
     <header className="w-full sticky top-0 z-50">
       {/* Mobile Drawer Overlay */}
-      <div 
-        className={`fixed inset-0 bg-black/50 z-[100] transition-opacity duration-300 md:hidden ${
-          isDrawerOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
-        }`}
+      <div
+        className={`fixed inset-0 bg-black/50 z-[100] transition-opacity duration-300 md:hidden ${isDrawerOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+          }`}
         onClick={() => setIsDrawerOpen(false)}
       ></div>
 
       {/* Mobile Drawer */}
-      <div 
-        className={`fixed top-0 left-0 bottom-0 w-[80%] max-w-[300px] bg-white z-[101] shadow-2xl transition-transform duration-300 md:hidden flex flex-col ${
-          isDrawerOpen ? "translate-x-0" : "-translate-x-full"
-        }`}
+      <div
+        className={`fixed top-0 left-0 bottom-0 w-[80%] max-w-[300px] bg-white z-[101] shadow-2xl transition-transform duration-300 md:hidden flex flex-col ${isDrawerOpen ? "translate-x-0" : "-translate-x-full"
+          }`}
       >
         {/* Drawer Header */}
         <div className="bg-white border-b border-gray-100 p-4 flex items-center justify-between">
@@ -130,13 +128,13 @@ const Header = () => {
             </svg>
           </button>
           <Link href="/" className="flex items-center" onClick={() => setIsDrawerOpen(false)}>
-            <div className="relative h-8 w-28">
-              <Image 
-                src="/logo/logo1.png" 
-                alt="Fabrico Fashion Logo" 
+            <div className="relative h-12 w-12">
+              <Image
+                src="/logo/logo3.jpeg"
+                alt="1stopDokan Logo"
                 fill
-                sizes="112px"
-                className="object-contain" 
+                sizes="48px"
+                className="object-contain"
                 priority
               />
             </div>
@@ -150,8 +148,8 @@ const Header = () => {
             const hasSubs = subs.length > 0;
             return (
               <div key={index} className="border-b border-gray-100">
-                <Link 
-                  href={`/category/${cat.slug}`} 
+                <Link
+                  href={`/category/${cat.slug}`}
                   className="flex items-center justify-between p-3.5 hover:bg-gray-50 transition-colors font-semibold"
                   onClick={() => setIsDrawerOpen(false)}
                 >
@@ -189,7 +187,7 @@ const Header = () => {
         <div className="container-custom flex flex-col gap-3 md:gap-4">
           <div className="flex items-center justify-between gap-4">
             {/* Mobile Menu Icon */}
-            <button 
+            <button
               className="md:hidden text-[#0B5A70] hover:text-[#FF5722] transition-colors"
               onClick={() => setIsDrawerOpen(true)}
             >
@@ -200,14 +198,14 @@ const Header = () => {
 
             {/* Logo */}
             <Link href="/" className="flex-shrink-0 md:flex-none absolute left-1/2 -translate-x-1/2 md:relative md:left-0 md:translate-x-0">
-              <div className="relative h-8 md:h-10 w-32 md:w-40 flex items-center">
-                <Image 
-                  src="/logo/logo1.png" 
-                  alt="Fabrico Fashion Logo" 
+              <div className="relative h-12 md:h-16 w-12 md:w-16 flex items-center">
+                <Image
+                  src="/logo/logo3.jpeg"
+                  alt="1stopDokan Logo"
                   fill
-                  sizes="(max-width: 768px) 128px, 160px"
-                  className="object-contain object-left md:object-center" 
-                  priority 
+                  sizes="(max-width: 768px) 48px, 64px"
+                  className="object-contain object-left md:object-center"
+                  priority
                 />
               </div>
             </Link>
@@ -242,10 +240,10 @@ const Header = () => {
             {/* Action Icons */}
             <div className="flex items-center gap-3 md:gap-5 text-[#0B5A70]">
               <Link href="/track-order" className="hidden lg:flex items-center gap-1.5 hover:text-[#FF5722] transition-colors duration-200 text-[13px] font-semibold">
-                 <HugeiconsIcon icon={TruckDeliveryIcon} size={20} color="currentColor" strokeWidth={2} />
-                 <span>Track Order</span>
+                <HugeiconsIcon icon={TruckDeliveryIcon} size={20} color="currentColor" strokeWidth={2} />
+                <span>Track Order</span>
               </Link>
-              
+
               <Link href="/checkout" className="relative flex items-center justify-center p-1 hover:text-[#FF5722] transition-colors duration-200">
                 <div className="relative">
                   <HugeiconsIcon icon={ShoppingCart01Icon} size={24} color="currentColor" strokeWidth={2} />
@@ -304,8 +302,8 @@ const Header = () => {
               scrollbar-width: none;
             }
           `}</style>
-          
-          <div 
+
+          <div
             ref={scrollRef}
             onMouseDown={handleMouseDown}
             onMouseMove={handleMouseMove}
@@ -320,8 +318,8 @@ const Header = () => {
 
               return (
                 <div key={`cat-${cat.id || index}`} className="relative group py-1 flex-shrink-0">
-                  <Link 
-                    href={`/category/${cat.slug}`} 
+                  <Link
+                    href={`/category/${cat.slug}`}
                     className="hover:text-[#FF5722] flex items-center gap-1 transition-colors py-1"
                     onClick={handleLinkClick}
                   >

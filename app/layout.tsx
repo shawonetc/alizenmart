@@ -13,16 +13,16 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://fabricofashion.com"),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://1stopdokan.com"),
   title: {
-    default: "Fabrico Fashion - Best Premium Fashion & Lifestyle in Bangladesh",
-    template: "%s | Fabrico Fashion",
+    default: "1stopDokan - Best Premium Fashion & Lifestyle in Bangladesh",
+    template: "%s | 1stopDokan",
   },
-  description: "Explore Fabrico Fashion for premium clothing, high-quality panjabi, embroidery designs, gadgets, smart electronics, home & lifestyle products in Bangladesh.",
-  keywords: ["e-commerce", "online shopping", "Bangladesh", "fashion", "lifestyle", "panjabi", "premium clothing", "Fabrico Fashion"],
-  authors: [{ name: "Fabrico Fashion Team" }],
-  creator: "Fabrico Fashion",
-  publisher: "Fabrico Fashion",
+  description: "Explore 1stopDokan for premium clothing, high-quality panjabi, embroidery designs, gadgets, smart electronics, home & lifestyle products in Bangladesh.",
+  keywords: ["e-commerce", "online shopping", "Bangladesh", "fashion", "lifestyle", "panjabi", "premium clothing", "1stopDokan"],
+  authors: [{ name: "1stopDokan Team" }],
+  creator: "1stopDokan",
+  publisher: "1stopDokan",
   robots: {
     index: true,
     follow: true,
@@ -37,23 +37,23 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://fabricofashion.com",
-    siteName: "Fabrico Fashion",
-    title: "Fabrico Fashion - Best Premium Fashion & Lifestyle in Bangladesh",
-    description: "Explore Fabrico Fashion for premium clothing, high-quality panjabi, embroidery designs, gadgets, and lifestyle items in Bangladesh.",
+    url: "https://1stopdokan.com",
+    siteName: "1stopDokan",
+    title: "1stopDokan - Best Premium Fashion & Lifestyle in Bangladesh",
+    description: "Explore 1stopDokan for premium clothing, high-quality panjabi, embroidery designs, gadgets, and lifestyle items in Bangladesh.",
     images: [
       {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Fabrico Fashion - Premium Shopping Hub",
+        alt: "1stopDokan - Premium Shopping Hub",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Fabrico Fashion - Best Premium Fashion & Lifestyle in Bangladesh",
-    description: "Explore Fabrico Fashion for premium clothing, high-quality panjabi, embroidery designs, gadgets, and lifestyle items.",
+    title: "1stopDokan - Best Premium Fashion & Lifestyle in Bangladesh",
+    description: "Explore 1stopDokan for premium clothing, high-quality panjabi, embroidery designs, gadgets, and lifestyle items.",
     images: ["/og-image.png"],
   },
   alternates: {

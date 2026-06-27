@@ -4,8 +4,8 @@ import HomeClient from "../HomeClient";
 
 // Metadata for homepage
 export const metadata = {
-  title: "Fabrico Fashion - Best Premium Fashion & Lifestyle in Bangladesh",
-  description: "Explore Fabrico Fashion for premium clothing, high-quality panjabi, embroidery designs, gadgets, smart electronics, home & lifestyle products in Bangladesh.",
+  title: "1stopDokan - Best Premium Fashion & Lifestyle in Bangladesh",
+  description: "Explore 1stopDokan for premium clothing, high-quality panjabi, embroidery designs, gadgets, smart electronics, home & lifestyle products in Bangladesh.",
 };
 
 // Server-side cached query with "use cache" directive
@@ -46,26 +46,26 @@ export default async function Home() {
     {
       "@context": "https://schema.org",
       "@type": "WebSite",
-      "name": "Fabrico Fashion",
-      "url": "https://fabricofashion.com",
+      "name": "1stopDokan",
+      "url": "https://1stopdokan.com",
       "potentialAction": {
         "@type": "SearchAction",
-        "target": "https://fabricofashion.com/categories?q={search_term_string}",
+        "target": "https://1stopdokan.com/categories?q={search_term_string}",
         "query-input": "required name=search_term_string"
       }
     },
     {
       "@context": "https://schema.org",
       "@type": "Organization",
-      "name": "Fabrico Fashion",
-      "url": "https://fabricofashion.com",
-      "logo": "https://fabricofashion.com/favicon.ico",
+      "name": "1stopDokan",
+      "url": "https://1stopdokan.com",
+      "logo": "https://1stopdokan.com/favicon.ico",
       "sameAs": [
         "https://www.facebook.com/fabricofashion"
       ],
       "contactPoint": {
         "@type": "ContactPoint",
-        "telephone": "+8801700000000",
+        "telephone": "+8801534694518",
         "contactType": "customer service"
       }
     }
