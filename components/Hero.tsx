@@ -67,7 +67,7 @@ const Hero = ({
         </div>
 
         {/* Side Banners */}
-        <div className="col-span-12 lg:col-span-3 flex flex-row lg:flex-col gap-3 md:gap-6">
+        <div className="hidden lg:flex lg:col-span-3 flex-col gap-6">
           <div className="relative flex-1 aspect-[1.2/1] lg:aspect-auto rounded-lg md:rounded-2xl overflow-hidden shadow-sm border border-gray-100">
             <Image
               src={sideBanner1}

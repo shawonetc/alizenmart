@@ -51,7 +51,7 @@ export default function CheckoutPage() {
   }, []);
 
   const subtotal = totalPrice;
-  const deliveryCharge = deliveryOption === "inside" ? 60 : 120;
+  const deliveryCharge = deliveryOption === "inside" ? 60 : 130;
   const total = totalPrice + deliveryCharge;
   const discount = cart.reduce((acc, item) => acc + (item.oldPrice ? (item.oldPrice - item.price) * item.quantity : 0), 0);
 

@@ -106,7 +106,7 @@ export default function ShirtLandingPage() {
   const oldUnitPrice = 850;
   const totalQuantity = quantity * selectedSizes.length;
   const subtotal = unitPrice * totalQuantity;
-  const deliveryCharge = deliveryOption === "inside" ? 70 : 120;
+  const deliveryCharge = deliveryOption === "inside" ? 70 : 130;
 
   // Free delivery for 2 or more shirts!
   const isFreeDelivery = totalQuantity >= 2;
@@ -1025,7 +1025,7 @@ export default function ShirtLandingPage() {
                         onChange={() => setDeliveryOption("outside")}
                         className="accent-amber-400"
                       />
-                      <span className="text-xs text-slate-200">ঢাকার বাইরে (৳১২০)</span>
+                      <span className="text-xs text-slate-200">ঢাকার বাইরে (৳১৩০)</span>
                     </label>
                   </div>
                 </div>

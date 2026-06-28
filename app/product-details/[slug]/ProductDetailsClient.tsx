@@ -249,7 +249,7 @@ export default function ProductDetailsClient({ product }: ProductDetailsClientPr
               )}
               {activeTab === "Delivery Policy" && (
                 <div className="text-gray-700 text-sm font-semibold text-gray-700">
-                  Standard delivery takes 3-5 business days. Inside Dhaka: 60 BDT, Outside Dhaka: 120 BDT.
+                  Standard delivery takes 3-5 business days. Inside Dhaka: 60 BDT, Outside Dhaka: 130 BDT.
                 </div>
               )}
               {activeTab === "Reviews(0)" && (
