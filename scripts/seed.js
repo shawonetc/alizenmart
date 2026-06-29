@@ -67,8 +67,8 @@ async function seed() {
     console.log("\n2. Seeding settings...");
     const { error: settingsError } = await supabase.from('settings').upsert([{
         id: 1,
-        hero_main_slider: "/ads.png",
-        hero_main_slider_2: "/ads2.png",
+        hero_main_slider: "/images/hero/ads.png",
+        hero_main_slider_2: "/images/hero/ads2.png",
         hero_main_slider_3: "",
         hero_side_banner_1: "",
         hero_side_banner_2: "",
