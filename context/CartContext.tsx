@@ -11,6 +11,9 @@ interface CartItem {
   oldPrice?: number;
   image: string;
   quantity: number;
+  color?: string | null;
+  size?: string | null;
+  sku?: string | null;
 }
 
 interface CartContextType {
@@ -56,13 +59,15 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const addToCart = (product: any) => {
     setCart((prevCart) => {
-      const existingItem = prevCart.find((item) => item.title === product.title);
+      const targetId = product.id || Date.now();
+      const existingItem = prevCart.find((item) => item.id === targetId);
+      const addQty = product.quantity || 1;
       if (existingItem) {
         return prevCart.map((item) =>
-          item.title === product.title ? { ...item, quantity: item.quantity + 1 } : item
+          item.id === targetId ? { ...item, quantity: item.quantity + addQty } : item
         );
       }
-      return [...prevCart, { ...product, quantity: 1, id: product.id || Date.now() }];
+      return [...prevCart, { ...product, quantity: addQty, id: targetId }];
     });
     showToast(`${product.title} কার্টে যোগ করা হয়েছে!`, product.image);
   };

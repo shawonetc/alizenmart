@@ -354,6 +354,12 @@ export default function CheckoutPage() {
                       </div>
                       <div className="flex-1 space-y-2">
                         <h3 className="text-sm font-bold text-gray-700 leading-tight pr-4 line-clamp-2">{item.title}</h3>
+                        {(item.color || item.size) && (
+                          <div className="text-[10px] text-gray-450 font-bold uppercase tracking-wider flex gap-2">
+                            {item.color && <span>Color: {item.color}</span>}
+                            {item.size && <span>Size: {item.size}</span>}
+                          </div>
+                        )}
                         <div className="flex items-center justify-between">
                           <div className="flex items-center border border-gray-200 rounded-sm overflow-hidden">
                             <button

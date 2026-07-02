@@ -1,15 +1,16 @@
 import { supabase } from "@/lib/supabase";
 import ProductDetailsClient from "./ProductDetailsClient";
 import type { Metadata } from "next";
+import { parseProductMetadata } from "@/lib/metadataHelper";
 
 // Dummy product list for fallback
 const fallbackProducts = [
   { id: 1, title: "Airpods Case", price: 160, oldPrice: 180, image: "/airpods_case.png", category: "Gadgets" },
   { id: 2, title: "৭টি গুরুত্বপূর্ণ ইসলামিক বইয়ের কম্বো প্যাকেজ", price: 980, oldPrice: 1755, image: "/islamic_books.png", category: "Books" },
   { id: 3, title: "ঈদ আয়োজনে ১০% ডিসকাউন্টে বাবা/ছেলে ম্যাচিং পাঞ্জাবী", price: 1040, image: "/matching_panjabi.png", category: "Fashion" },
-  { id: 4, title: "বড়দের শীতের আরামদায়ক সফট কাতান কাপড়ে পাঞ্জাবী", price: 1030, image: "/soft_katan_panjabi.png", category: "Fashion" },
+  { id: 4, title: "বড়দের শীতের আরামদায়ক সফট কাতান কাপড়ে পাঞ্জাবী", price: 1030, image: "/soft_katan_panjabi.png", category: "Fashion" },
   { id: 5, title: "ছোটদের শীতের আরামদায়ক সফট কাতান কাপড়ে ম্যাচিং-কটি পাঞ্জাবী", price: 1962, oldPrice: 2180, image: "/kids_koti_panjabi.png", category: "Fashion" },
-  { id: 6, title: "বড়দের শীতের আরামদায়ক সফট কাতান কাপড়ে ম্যাচিং-কটি পাঞ্জাবী", price: 2990, oldPrice: 3320, image: "/soft_katan_panjabi.png", category: "Fashion" },
+  { id: 6, title: "বড়দের শীতের আরামদায়ক সফট কাতান কাপড়ে ম্যাচিং-কটি পাঞ্জাবী", price: 2990, oldPrice: 3320, image: "/soft_katan_panjabi.png", category: "Fashion" },
   { id: 7, title: "প্রিমিয়াম সিজন ফ্রেশ মিক্স খেজুর কম্বো প্যাকেজ", price: 1760, image: "/fresh_dates.png", category: "Healthy Food" },
   { id: 8, title: "আকর্ষণীয় এম্ব্রয়ডারী ডিজাইনের নতুন কালেকশন", price: 690, image: "/embroidery_dress.png", category: "Fashion" },
   { id: 9, title: "প্রিমিয়াম কটন ফেব্রিক পাঞ্জাবী", price: 1380, image: "/soft_katan_panjabi.png", category: "Fashion" },
@@ -42,7 +43,7 @@ async function getProductBySlug(slug: string) {
   "use cache";
   cacheLife("minutes");
   const decodedSlug = typeof slug === 'string' ? decodeURIComponent(slug) : '';
-  
+
   try {
     // 1. Try to query database
     const { data: dbProducts } = await supabase
@@ -53,15 +54,63 @@ async function getProductBySlug(slug: string) {
       const matched = dbProducts.find(p => generateSlug(p.title) === decodedSlug);
       if (matched) {
         const mainImg = matched.image || "/placeholder.png";
+        const { description, metadata } = parseProductMetadata(matched.description || "");
+
+        let finalMetadata = metadata;
+        if (!finalMetadata || !finalMetadata.hasVariants) {
+          const isAirpods = decodedSlug.includes("airpods") || matched.title.toLowerCase().includes("airpods");
+          const blackImg = isAirpods
+            ? "https://images.unsplash.com/photo-1592861956120-e524fc739696?w=600&auto=format&fit=crop&q=80"
+            : mainImg;
+          const blueImg = isAirpods
+            ? "https://images.unsplash.com/photo-1600294037681-c80b4cb5b434?w=600&auto=format&fit=crop&q=80"
+            : mainImg;
+          const orangeImg = isAirpods
+            ? "https://images.unsplash.com/photo-1603302576837-37561b2e2302?w=600&auto=format&fit=crop&q=80"
+            : mainImg;
+
+          finalMetadata = {
+            hasVariants: true,
+            images: [blackImg, blueImg, orangeImg],
+            colors: [
+              { name: "Black", images: [blackImg] },
+              { name: "Blue", images: [blueImg] },
+              { name: "Orange", images: [orangeImg] }
+            ],
+            sizes: ["S", "M", "L", "XL"],
+            variants: [
+              { color: "Black", size: "S", price: matched.price, oldPrice: matched.oldPrice, stock: matched.stock || 10, sku: `SKU-${matched.id}-BLK-S` },
+              { color: "Black", size: "M", price: matched.price, oldPrice: matched.oldPrice, stock: matched.stock || 10, sku: `SKU-${matched.id}-BLK-M` },
+              { color: "Black", size: "L", price: matched.price, oldPrice: matched.oldPrice, stock: matched.stock || 10, sku: `SKU-${matched.id}-BLK-L` },
+              { color: "Black", size: "XL", price: matched.price, oldPrice: matched.oldPrice, stock: matched.stock || 10, sku: `SKU-${matched.id}-BLK-XL` },
+
+              { color: "Blue", size: "S", price: matched.price, oldPrice: matched.oldPrice, stock: matched.stock || 10, sku: `SKU-${matched.id}-BLU-S` },
+              { color: "Blue", size: "M", price: matched.price, oldPrice: matched.oldPrice, stock: matched.stock || 10, sku: `SKU-${matched.id}-BLU-M` },
+              { color: "Blue", size: "L", price: matched.price, oldPrice: matched.oldPrice, stock: matched.stock || 10, sku: `SKU-${matched.id}-BLU-L` },
+              { color: "Blue", size: "XL", price: matched.price, oldPrice: matched.oldPrice, stock: matched.stock || 10, sku: `SKU-${matched.id}-BLU-XL` },
+
+              { color: "Orange", size: "S", price: matched.price, oldPrice: matched.oldPrice, stock: matched.stock || 10, sku: `SKU-${matched.id}-ORG-S` },
+              { color: "Orange", size: "M", price: matched.price, oldPrice: matched.oldPrice, stock: matched.stock || 10, sku: `SKU-${matched.id}-ORG-M` },
+              { color: "Orange", size: "L", price: matched.price, oldPrice: matched.oldPrice, stock: matched.stock || 10, sku: `SKU-${matched.id}-ORG-L` },
+              { color: "Orange", size: "XL", price: matched.price, oldPrice: matched.oldPrice, stock: matched.stock || 10, sku: `SKU-${matched.id}-ORG-XL` }
+            ]
+          };
+        }
+
         return {
+          id: matched.id,
           title: matched.title,
           price: matched.price,
           oldPrice: matched.oldPrice,
-          images: [mainImg, mainImg, mainImg, mainImg, mainImg],
+          image: mainImg,
+          images: finalMetadata?.images && finalMetadata.images.length > 0 ? finalMetadata.images : [mainImg],
           category: matched.category || "General",
           tags: ["Featured Products", "Flash Sale"],
           unit: "Pieces",
-          description: matched.description || `Buy ${matched.title} online at Speed Bazar. Discover premium quality products with fast delivery in Bangladesh.`,
+          description: description || `Buy ${matched.title} online at Speed Bazar. Discover premium quality products with fast delivery in Bangladesh.`,
+          metadata: finalMetadata,
+          videoUrl: finalMetadata?.videoUrl || (decodedSlug.includes("waist-bag") ? "https://assets.mixkit.co/videos/preview/mixkit-woman-running-on-top-of-a-mountain-40286-large.mp4" : undefined),
+          stock: matched.stock
         };
       }
     }
@@ -73,15 +122,60 @@ async function getProductBySlug(slug: string) {
   const matchedFallback = fallbackProducts.find(p => generateSlug(p.title) === decodedSlug);
   const matched = matchedFallback || fallbackProducts[0];
   const fallbackImg = matched.image || "/placeholder.png";
+
+  const isAirpods = decodedSlug.includes("airpods") || matched.title.toLowerCase().includes("airpods");
+  const blackImg = isAirpods 
+    ? "https://images.unsplash.com/photo-1592861956120-e524fc739696?w=600&auto=format&fit=crop&q=80" 
+    : fallbackImg;
+  const blueImg = isAirpods 
+    ? "https://images.unsplash.com/photo-1600294037681-c80b4cb5b434?w=600&auto=format&fit=crop&q=80" 
+    : fallbackImg;
+  const orangeImg = isAirpods 
+    ? "https://images.unsplash.com/photo-1603302576837-37561b2e2302?w=600&auto=format&fit=crop&q=80" 
+    : fallbackImg;
+
+  const fallbackMetadata = {
+    hasVariants: true,
+    images: [blackImg, blueImg, orangeImg],
+    colors: [
+      { name: "Black", images: [blackImg] },
+      { name: "Blue", images: [blueImg] },
+      { name: "Orange", images: [orangeImg] }
+    ],
+    sizes: ["S", "M", "L", "XL"],
+    variants: [
+      { color: "Black", size: "S", price: matched.price, oldPrice: matched.oldPrice, stock: 10, sku: `SKU-${matched.id}-BLK-S` },
+      { color: "Black", size: "M", price: matched.price, oldPrice: matched.oldPrice, stock: 10, sku: `SKU-${matched.id}-BLK-M` },
+      { color: "Black", size: "L", price: matched.price, oldPrice: matched.oldPrice, stock: 10, sku: `SKU-${matched.id}-BLK-L` },
+      { color: "Black", size: "XL", price: matched.price, oldPrice: matched.oldPrice, stock: 10, sku: `SKU-${matched.id}-BLK-XL` },
+      
+      { color: "Blue", size: "S", price: matched.price, oldPrice: matched.oldPrice, stock: 10, sku: `SKU-${matched.id}-BLU-S` },
+      { color: "Blue", size: "M", price: matched.price, oldPrice: matched.oldPrice, stock: 10, sku: `SKU-${matched.id}-BLU-M` },
+      { color: "Blue", size: "L", price: matched.price, oldPrice: matched.oldPrice, stock: 10, sku: `SKU-${matched.id}-BLU-L` },
+      { color: "Blue", size: "XL", price: matched.price, oldPrice: matched.oldPrice, stock: 10, sku: `SKU-${matched.id}-BLU-XL` },
+      
+      { color: "Orange", size: "S", price: matched.price, oldPrice: matched.oldPrice, stock: 10, sku: `SKU-${matched.id}-ORG-S` },
+      { color: "Orange", size: "M", price: matched.price, oldPrice: matched.oldPrice, stock: 10, sku: `SKU-${matched.id}-ORG-M` },
+      { color: "Orange", size: "L", price: matched.price, oldPrice: matched.oldPrice, stock: 10, sku: `SKU-${matched.id}-ORG-L` },
+      { color: "Orange", size: "XL", price: matched.price, oldPrice: matched.oldPrice, stock: 10, sku: `SKU-${matched.id}-ORG-XL` }
+    ],
+    videoUrl: "https://assets.mixkit.co/videos/preview/mixkit-woman-running-on-top-of-a-mountain-40286-large.mp4"
+  };
+
   return {
+    id: matched.id,
     title: matched.title,
     price: matched.price,
     oldPrice: matched.oldPrice,
-    images: [fallbackImg, fallbackImg, fallbackImg, fallbackImg, fallbackImg],
+    image: fallbackImg,
+    images: [blackImg, blueImg, orangeImg],
     category: matched.category,
     tags: ["Featured Products", "Flash Sale"],
     unit: "Pieces",
     description: `Buy ${matched.title} online at Speed Bazar. Discover premium quality clothing and apparel with fast delivery in Bangladesh.`,
+    metadata: fallbackMetadata,
+    videoUrl: fallbackMetadata.videoUrl,
+    stock: (matched as any).stock || 10
   };
 }
 

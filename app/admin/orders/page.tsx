@@ -262,6 +262,13 @@ export default function AdminOrders() {
                                     </div>
                                     <div className="flex-1 min-w-0">
                                       <p className="text-xs font-bold text-gray-700 truncate">{item.title}</p>
+                                      {(item.color || item.size) && (
+                                        <p className="text-[10px] text-gray-400 font-semibold uppercase tracking-wider">
+                                          {item.color && `Color: ${item.color}`}
+                                          {item.color && item.size && " / "}
+                                          {item.size && `Size: ${item.size}`}
+                                        </p>
+                                      )}
                                       <p className="text-[10px] text-gray-400">
                                         ৳{item.price} × {item.quantity}
                                       </p>
