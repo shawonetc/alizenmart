@@ -107,6 +107,21 @@ export default function ProductDetailsClient({ product }: ProductDetailsClientPr
     setSelectedMedia(mediaItems[0] || { type: "image", url: "/placeholder.png" });
   }, [mediaItems]);
 
+  // Track ViewContent in Meta Pixel
+  useEffect(() => {
+    if (product) {
+      if (typeof window !== "undefined" && (window as any).fbq) {
+        (window as any).fbq("track", "ViewContent", {
+          content_name: product.title,
+          content_ids: [product.id?.toString() || ""],
+          content_type: "product",
+          value: product.price,
+          currency: "BDT",
+        });
+      }
+    }
+  }, [product]);
+
   // Look up current active variant item (combination)
   const currentVariant = useMemo(() => {
     if (!hasVariants) return null;

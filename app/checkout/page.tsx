@@ -3,7 +3,7 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import BottomNav from "@/components/BottomNav";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -37,6 +37,8 @@ export default function CheckoutPage() {
     setErrorModal({ show: true, message, title });
   };
 
+  const checkoutTrackedRef = useRef(false);
+
   // Prefill user details if logged in
   useEffect(() => {
     const getUserData = async () => {
@@ -49,6 +51,22 @@ export default function CheckoutPage() {
     };
     getUserData();
   }, []);
+
+  // Track InitiateCheckout in Meta Pixel
+  useEffect(() => {
+    if (cart.length > 0 && !checkoutTrackedRef.current) {
+      checkoutTrackedRef.current = true;
+      if (typeof window !== "undefined" && (window as any).fbq) {
+        (window as any).fbq("track", "InitiateCheckout", {
+          content_ids: cart.map((item) => item.id?.toString() || ""),
+          content_type: "product",
+          value: totalPrice,
+          currency: "BDT",
+          num_items: totalItems,
+        });
+      }
+    }
+  }, [cart, totalPrice, totalItems]);
 
   const subtotal = totalPrice;
   const deliveryCharge = deliveryOption === "inside" ? 60 : 120;
@@ -127,6 +145,17 @@ export default function CheckoutPage() {
         localStorage.setItem("local_orders", JSON.stringify(existingLocalOrders));
       } else if (data && data[0]) {
         finalOrderId = String(data[0].id).substring(0, 8).toUpperCase();
+      }
+
+      // Track Purchase in Meta Pixel
+      if (typeof window !== "undefined" && (window as any).fbq) {
+        (window as any).fbq("track", "Purchase", {
+          content_ids: cart.map((item) => item.id?.toString() || ""),
+          content_type: "product",
+          value: total,
+          currency: "BDT",
+          num_items: totalItems,
+        });
       }
 
       setPlacedOrderId(finalOrderId);
@@ -295,7 +324,7 @@ export default function CheckoutPage() {
                       <div className="w-8 h-8 relative">
                         <Image src="/bkash_logo.png" alt="bKash" fill className="object-contain" />
                       </div>
-                      <span className="text-sm font-bold text-gray-800 flex-1">01771680742</span>
+                      <span className="text-sm font-bold text-gray-800 flex-1">01723523706</span>
                       <button className="text-gray-400 hover:text-[#1a80c2]">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5">
                           <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 0 1-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 0 1 1.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 0 0-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 10.375H9.375a1.125 1.125 0 0 1-1.125-1.125v-9.25m12 6.625v-1.875a3.375 3.375 0 0 0-3.375-3.375h-1.5a1.125 1.125 0 0 1-1.125-1.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H9.75" />

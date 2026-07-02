@@ -47,7 +47,7 @@ const Footer = () => {
                   </svg>
                 </Link>
                 <Link 
-                  href="https://wa.me/8801771680742" 
+                  href="https://wa.me/8801723523706" 
                   target="_blank"
                   className="w-9 h-9 rounded-full bg-black flex items-center justify-center hover:bg-[#FF5722] hover:scale-105 active:scale-95 transition-all shadow-sm"
                   title="WhatsApp"
@@ -83,7 +83,7 @@ const Footer = () => {
                   <svg className="w-5 h-5 text-[#0a3a5a] flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 0 0 2.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.387a12.035 12.035 0 0 1-7.108-7.108c-.157-.44.009-.927.387-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 0 0-1.091-.852H4.5A2.25 2.25 0 0 0 2.25 4.5v2.25z" />
                   </svg>
-                  <span className="text-[#0c4063] font-medium text-xs md:text-sm">01771-680742</span>
+                  <span className="text-[#0c4063] font-medium text-xs md:text-sm">01723-523706</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <svg className="w-5 h-5 text-[#0a3a5a] mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
@@ -139,7 +139,7 @@ const Footer = () => {
       {/* Floating chat bubble on bottom right */}
       <div className="fixed bottom-28 md:bottom-6 right-6 z-40">
         <Link 
-          href="https://wa.me/8801771680742" 
+          href="https://wa.me/8801723523706" 
           target="_blank"
           className="w-12 h-12 md:w-14 md:h-14 bg-[#FF5722] hover:bg-[#E64A19] hover:scale-105 active:scale-95 transition-all text-white rounded-full flex items-center justify-center shadow-lg cursor-pointer"
           aria-label="Chat with Us"

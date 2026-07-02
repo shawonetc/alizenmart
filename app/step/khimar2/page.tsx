@@ -436,6 +436,17 @@ export default function KhimarLandingPage() {
         localStorage.setItem("local_orders", JSON.stringify(existingLocalOrders));
       }
 
+      // Track Purchase in Meta Pixel
+      if (typeof window !== "undefined" && (window as any).fbq) {
+        (window as any).fbq("track", "Purchase", {
+          content_ids: orderPayload.items.map((item) => item.id?.toString() || ""),
+          content_type: "product",
+          value: total,
+          currency: "BDT",
+          num_items: totalQuantity,
+        });
+      }
+
       setPlacedOrderId(finalOrderId);
       setShowSuccessModal(true);
 

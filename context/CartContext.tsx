@@ -69,6 +69,18 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
       }
       return [...prevCart, { ...product, quantity: addQty, id: targetId }];
     });
+
+    // Track AddToCart in Meta Pixel
+    if (typeof window !== "undefined" && (window as any).fbq) {
+      (window as any).fbq("track", "AddToCart", {
+        content_name: product.title,
+        content_ids: [product.id?.toString() || ""],
+        content_type: "product",
+        value: product.price,
+        currency: "BDT",
+      });
+    }
+
     showToast(`${product.title} কার্টে যোগ করা হয়েছে!`, product.image);
   };
 

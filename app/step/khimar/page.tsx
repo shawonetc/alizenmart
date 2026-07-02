@@ -222,6 +222,17 @@ export default function ShirtLandingPage() {
         localStorage.setItem("local_orders", JSON.stringify(existingLocalOrders));
       }
 
+      // Track Purchase in Meta Pixel
+      if (typeof window !== "undefined" && (window as any).fbq) {
+        (window as any).fbq("track", "Purchase", {
+          content_ids: orderPayload.items.map((item) => item.id?.toString() || ""),
+          content_type: "product",
+          value: total,
+          currency: "BDT",
+          num_items: totalQuantity,
+        });
+      }
+
       setPlacedOrderId(finalOrderId);
       setShowSuccessModal(true);
 
@@ -340,7 +351,7 @@ export default function ShirtLandingPage() {
                 </button>
                 <div className="text-slate-400 font-bold text-sm flex items-center gap-1.5">
                   <HugeiconsIcon icon={CallIcon} size={18} className="text-amber-400" />
-                   <span>হটলাইন: <a href="tel:01771680742" className="text-white hover:text-amber-400">01771680742</a></span>
+                   <span>হটলাইন: <a href="tel:01723523706" className="text-white hover:text-amber-400">01723523706</a></span>
                 </div>
               </div>
             </div>
@@ -887,7 +898,7 @@ export default function ShirtLandingPage() {
                         <p className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">
                           {paymentMethod.toUpperCase()} Personal Number
                         </p>
-                        <p className="text-sm font-extrabold text-amber-400 mt-0.5">01771680742</p>
+                        <p className="text-sm font-extrabold text-amber-400 mt-0.5">01723523706</p>
                       </div>
                       <span className="bg-emerald-500/10 text-emerald-400 text-[10px] font-bold px-2 py-0.5 rounded">Active</span>
                     </div>
