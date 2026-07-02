@@ -8,6 +8,8 @@ import { ImageAdd01Icon } from "@hugeicons/core-free-icons";
 import { supabase } from "@/lib/supabase";
 import { serializeProductMetadata } from "@/lib/metadataHelper";
 
+import { revalidateProductCache } from "@/app/actions";
+
 export default function AddProduct() {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
@@ -348,6 +350,9 @@ export default function AddProduct() {
     };
 
     const { error } = await supabase.from('products').insert([productData]);
+    if (!error) {
+      await revalidateProductCache();
+    }
 
     if (error) {
       console.error('Error adding product:', error);

@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import { supabase } from "@/lib/supabase";
 import { HugeiconsIcon } from "@hugeicons/react";
 import { Settings03Icon, ImageAdd01Icon } from "@hugeicons/core-free-icons";
+import { revalidateProductCache } from "@/app/actions";
 
 interface BannerUploadFieldProps {
   label: string;
@@ -204,6 +205,7 @@ export default function AdminSettings() {
       if (error) {
         alert(`Error saving settings: ${error.message}`);
       } else {
+        await revalidateProductCache();
         alert("Settings saved successfully!");
       }
     } catch (err) {

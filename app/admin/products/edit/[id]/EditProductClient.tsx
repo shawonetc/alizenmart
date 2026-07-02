@@ -7,6 +7,7 @@ import { HugeiconsIcon } from "@hugeicons/react";
 import { ImageAdd01Icon } from "@hugeicons/core-free-icons";
 import { supabase } from "@/lib/supabase";
 import { parseProductMetadata, serializeProductMetadata } from "@/lib/metadataHelper";
+import { revalidateProductCache } from "@/app/actions";
 
 interface EditProductClientProps {
   id: string;
@@ -472,6 +473,8 @@ export default function EditProductClient({ id }: EditProductClientProps) {
         .eq('id', id);
 
       if (error) throw error;
+
+      await revalidateProductCache();
 
       alert("Product updated successfully!");
       router.push("/admin/products");

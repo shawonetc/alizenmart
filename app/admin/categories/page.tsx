@@ -15,6 +15,7 @@ import {
 } from "@hugeicons/core-free-icons";
 import { supabase } from "@/lib/supabase";
 import Link from "next/link";
+import { revalidateProductCache } from "@/app/actions";
 
 export default function AdminCategories() {
   const [loading, setLoading] = useState(true);
@@ -133,6 +134,8 @@ export default function AdminCategories() {
 
       if (error) throw error;
 
+      await revalidateProductCache();
+
       alert("Category added successfully!");
       setNewCatName("");
       setNewCatSlug("");
@@ -158,6 +161,8 @@ export default function AdminCategories() {
           .eq("id", cat.id);
 
         if (error) throw error;
+
+        await revalidateProductCache();
 
         alert("Category deleted successfully!");
         fetchProductStats();
@@ -209,6 +214,8 @@ export default function AdminCategories() {
           console.error("Failed to cascade rename to products:", prodError);
         }
       }
+
+      await revalidateProductCache();
 
       alert("Category updated successfully!");
       setShowEditModal(false);
@@ -369,6 +376,7 @@ export default function AdminCategories() {
       });
 
       await Promise.all(updates);
+      await revalidateProductCache();
       fetchProductStats();
     } catch (err: any) {
       console.error("Failed to reorder categories:", err);
@@ -403,6 +411,7 @@ export default function AdminCategories() {
         .eq("id", cat.id);
 
       if (error) throw error;
+      await revalidateProductCache();
       fetchProductStats();
     } catch (err: any) {
       alert(`Error nesting category: ${err.message}`);
@@ -424,6 +433,7 @@ export default function AdminCategories() {
         .eq("id", cat.id);
 
       if (error) throw error;
+      await revalidateProductCache();
       fetchProductStats();
     } catch (err: any) {
       alert(`Error promoting category: ${err.message}`);

@@ -6,6 +6,7 @@ import Image from "next/image";
 import { supabase } from "@/lib/supabase";
 import { HugeiconsIcon } from "@hugeicons/react";
 import { Add01Icon, Search01Icon, PencilEdit01Icon, Delete02Icon, StarIcon } from "@hugeicons/core-free-icons";
+import { revalidateProductCache } from "@/app/actions";
 
 export default function AdminProducts() {
   const [products, setProducts] = useState<any[]>([]);
@@ -89,6 +90,7 @@ export default function AdminProducts() {
       if (error) {
         alert("Error deleting product");
       } else {
+        await revalidateProductCache();
         fetchProducts();
       }
     }
@@ -105,6 +107,7 @@ export default function AdminProducts() {
       alert(`Error updating featured status: ${error.message}`);
       console.error("Error updating featured status:", error);
     } else {
+      await revalidateProductCache();
       setProducts(prevProducts => 
         prevProducts.map(p => p.id === id ? { ...p, is_featured: nextStatus } : p)
       );
