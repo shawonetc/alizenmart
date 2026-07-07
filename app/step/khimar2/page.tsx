@@ -579,7 +579,7 @@ export default function KhimarLandingPage() {
                 </button>
                 <div className="text-slate-500 font-bold text-sm flex items-center gap-1.5">
                   <HugeiconsIcon icon={CallIcon} size={18} className="text-[#0B5A70]" />
-                  <span>হটলাইন: <a href="tel:01791764444" className="text-[#0B5A70] hover:text-[#FF5722] transition-colors">01791764444</a></span>
+                  <span>হটলাইন: <a href="tel:01771680742" className="text-[#0B5A70] hover:text-[#FF5722] transition-colors">01771680742</a></span>
                 </div>
               </div>
             </ScrollReveal>
@@ -972,7 +972,7 @@ export default function KhimarLandingPage() {
                         <p className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">
                           {paymentMethod.toUpperCase()} Personal Number
                         </p>
-                        <p className="text-sm font-extrabold text-[#0B5A70] mt-0.5">01791764444</p>
+                        <p className="text-sm font-extrabold text-[#0B5A70] mt-0.5">01723523706</p>
                       </div>
                       <span className="bg-emerald-100 text-emerald-600 text-[10px] font-bold px-2.5 py-0.5 rounded">Active</span>
                     </div>

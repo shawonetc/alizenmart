@@ -351,7 +351,7 @@ export default function ShirtLandingPage() {
                 </button>
                 <div className="text-slate-400 font-bold text-sm flex items-center gap-1.5">
                   <HugeiconsIcon icon={CallIcon} size={18} className="text-amber-400" />
-                   <span>হটলাইন: <a href="tel:01723523706" className="text-white hover:text-amber-400">01723523706</a></span>
+                   <span>হটলাইন: <a href="tel:01771680742" className="text-white hover:text-amber-400">01771680742</a></span>
                 </div>
               </div>
             </div>
