@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import ProductImageGallery from "@/components/ProductImageGallery";
 
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -42,7 +43,6 @@ export default function ProductDetailsClient({ product }: ProductDetailsClientPr
 
   const [quantity, setQuantity] = useState(1);
   const [activeTab, setActiveTab] = useState("Description");
-  const [mainImage, setMainImage] = useState(product.images[0] || "/placeholder.png");
 
   const discountAmount = product.oldPrice ? product.oldPrice - product.price : 0;
   const discountPercent = product.oldPrice ? Math.round((discountAmount / product.oldPrice) * 100) : 0;
@@ -79,38 +79,12 @@ export default function ProductDetailsClient({ product }: ProductDetailsClientPr
             <div className="flex-1 flex flex-col md:flex-row gap-6">
 
               {/* Left Section (Gallery) */}
-              <div className="w-full md:w-[45%] flex gap-3">
-                {/* Thumbnails (Hidden on mobile) */}
-                <div className="hidden md:flex flex-col gap-2 w-16 md:w-20 shrink-0">
-                  {product.images.map((img, idx) => (
-                    <button
-                      key={idx}
-                      onClick={() => setMainImage(img)}
-                      className={`border rounded-lg p-1 transition-colors ${mainImage === img ? 'border-primary' : 'border-gray-200'}`}
-                    >
-                      <div className="relative aspect-square w-full bg-gray-50 rounded-md overflow-hidden">
-                        <Image src={img} alt="Thumbnail" fill className="object-contain p-1" />
-                      </div>
-                    </button>
-                  ))}
-                </div>
-
-                {/* Main Image */}
-                <div className="flex-1 relative border border-gray-100 rounded-lg bg-white overflow-hidden shadow-sm aspect-square group cursor-zoom-in">
-                  {discountPercent > 0 && (
-                    <div className="absolute top-3 left-3 bg-[#e5ffe5] text-[#00b300] text-xs font-bold px-2 py-1 rounded-sm z-10">
-                      -{discountPercent}% OFF
-                    </div>
-                  )}
-                  <button className="absolute top-3 right-3 z-10 text-primary">
-                    <HugeiconsIcon icon={FavouriteIcon} size={24} color="currentColor" />
-                  </button>
-                  <Image src={mainImage} alt={product.title} fill className="object-cover transition-transform duration-500 group-hover:scale-110" priority />
-                  {/* Mobile Image Counter Badge */}
-                  <div className="absolute bottom-3 left-1/2 -translate-x-1/2 bg-black/40 text-white text-[11px] font-semibold px-2.5 py-0.5 rounded-full md:hidden">
-                    1/{product.images.length}
-                  </div>
-                </div>
+              <div className="w-full md:w-[45%]">
+                <ProductImageGallery
+                  images={product.images}
+                  title={product.title}
+                  discountPercent={discountPercent}
+                />
               </div>
 
               {/* Middle Section (Product Info) */}

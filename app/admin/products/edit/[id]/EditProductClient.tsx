@@ -3,9 +3,8 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { HugeiconsIcon } from "@hugeicons/react";
-import { ImageAdd01Icon } from "@hugeicons/core-free-icons";
 import { supabase } from "@/lib/supabase";
+import MultiImageUploader from "@/components/MultiImageUploader";
 
 interface EditProductClientProps {
   id: string;
@@ -16,18 +15,18 @@ export default function EditProductClient({ id }: EditProductClientProps) {
 
   const [initialLoading, setInitialLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
-  const [dragging, setDragging] = useState(false);
-  const [uploading, setUploading] = useState(false);
   const [formData, setFormData] = useState({
     title: "",
     price: "",
     oldPrice: "",
     category: "",
     stock: "10",
-    image: "",
     description: "",
     is_featured: false,
   });
+
+  // Multiple images — first item is the primary/featured image
+  const [productImages, setProductImages] = useState<string[]>([]);
 
   const [categories, setCategories] = useState<string[]>([]);
 
@@ -46,10 +45,10 @@ export default function EditProductClient({ id }: EditProductClientProps) {
         setCategories(data.map((c: any) => c.name));
       } else {
         setCategories([
-          "Gadgets", "Smart Electronics", "Home & Lifestyle", "Beauty & Personal", 
-          "Healthy Food", "Fashion", "Mom & Baby", "Home & Kitchen", "Appliances", 
-          "Fitness & Health", "Smart Watch", "Religious", "Peripherals", 
-          "Smart Furniture", "Books", "Others"
+          "Gadgets", "Smart Electronics", "Home & Lifestyle", "Beauty & Personal",
+          "Healthy Food", "Fashion", "Mom & Baby", "Home & Kitchen", "Appliances",
+          "Fitness & Health", "Smart Watch", "Religious", "Peripherals",
+          "Smart Furniture", "Books", "Others",
         ]);
       }
     } catch (err) {
@@ -61,14 +60,12 @@ export default function EditProductClient({ id }: EditProductClientProps) {
     try {
       setInitialLoading(true);
       const { data, error } = await supabase
-        .from('products')
-        .select('*')
-        .eq('id', id)
+        .from("products")
+        .select("*")
+        .eq("id", id)
         .single();
 
-      if (error) {
-        throw error;
-      }
+      if (error) throw error;
 
       if (data) {
         setFormData({
@@ -77,10 +74,18 @@ export default function EditProductClient({ id }: EditProductClientProps) {
           oldPrice: data.oldPrice ? data.oldPrice.toString() : "",
           category: data.category || "Gadgets",
           stock: data.stock ? data.stock.toString() : "10",
-          image: data.image || "",
           description: data.description || "",
           is_featured: data.is_featured === true,
         });
+
+        // Backward compat: use `images` array if present, fall back to single `image`
+        if (Array.isArray(data.images) && data.images.length > 0) {
+          setProductImages(data.images);
+        } else if (data.image) {
+          setProductImages([data.image]);
+        } else {
+          setProductImages([]);
+        }
       }
     } catch (err: any) {
       console.error("Failed to load product details for editing:", err);
@@ -97,64 +102,14 @@ export default function EditProductClient({ id }: EditProductClientProps) {
     }
   }, [id, fetchProduct]);
 
-  const handleDragOver = (e: React.DragEvent) => {
-    e.preventDefault();
-    setDragging(true);
-  };
-
-  const handleDragLeave = () => {
-    setDragging(false);
-  };
-
-  const handleDrop = async (e: React.DragEvent) => {
-    e.preventDefault();
-    setDragging(false);
-    const file = e.dataTransfer.files?.[0];
-    if (file) {
-      await uploadProductImage(file);
-    }
-  };
-
-  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      await uploadProductImage(file);
-    }
-  };
-
-  const uploadProductImage = async (file: File) => {
-    setUploading(true);
-    try {
-      const fileExt = file.name.split('.').pop();
-      const fileName = `${Date.now()}-${Math.random().toString(36).substring(2)}.${fileExt}`;
-      const filePath = `products/${fileName}`;
-
-      const { error } = await supabase.storage
-        .from('images')
-        .upload(filePath, file, {
-          cacheControl: '3600',
-          upsert: true
-        });
-
-      if (error) throw error;
-
-      const { data: urlData } = supabase.storage
-        .from('images')
-        .getPublicUrl(filePath);
-
-      setFormData(prev => ({ ...prev, image: urlData.publicUrl }));
-    } catch (err: any) {
-      alert(`Upload failed: ${err.message}. Make sure the 'images' storage bucket is created in Supabase.`);
-      console.error(err);
-    } finally {
-      setUploading(false);
-    }
-  };
-
-
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (productImages.length === 0) {
+      alert("Please keep at least one product image.");
+      return;
+    }
+
     setSubmitting(true);
 
     try {
@@ -164,37 +119,40 @@ export default function EditProductClient({ id }: EditProductClientProps) {
         oldPrice: formData.oldPrice ? parseFloat(formData.oldPrice) : null,
         category: formData.category,
         stock: parseInt(formData.stock),
-        image: formData.image,
+        // Backward compat: keep `image` as primary
+        image: productImages[0],
+        // New: full array
+        images: productImages,
         description: formData.description,
         is_featured: formData.is_featured,
       };
 
       const { error } = await supabase
-        .from('products')
+        .from("products")
         .update(productData)
-        .eq('id', id);
+        .eq("id", id);
 
-      if (error) {
-        throw error;
-      }
+      if (error) throw error;
 
       alert("Product updated successfully!");
       router.push("/admin/products");
     } catch (err: any) {
-      console.error('Error updating product:', err);
+      console.error("Error updating product:", err);
       alert(`Error updating product: ${err.message}`);
     } finally {
       setSubmitting(false);
     }
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
+  ) => {
     const { name, value, type } = e.target;
-    if (type === 'checkbox') {
+    if (type === "checkbox") {
       const checked = (e.target as HTMLInputElement).checked;
-      setFormData(prev => ({ ...prev, [name]: checked }));
+      setFormData((prev) => ({ ...prev, [name]: checked }));
     } else {
-      setFormData(prev => ({ ...prev, [name]: value }));
+      setFormData((prev) => ({ ...prev, [name]: value }));
     }
   };
 
@@ -210,178 +168,149 @@ export default function EditProductClient({ id }: EditProductClientProps) {
   return (
     <div className="max-w-4xl mx-auto space-y-8">
       <div className="flex items-center gap-4">
-        <Link href="/admin/products" className="w-10 h-10 bg-white border border-gray-200 rounded-xl flex items-center justify-center hover:bg-gray-50 transition-all shadow-sm">
+        <Link
+          href="/admin/products"
+          className="w-10 h-10 bg-white border border-gray-200 rounded-xl flex items-center justify-center hover:bg-gray-50 transition-all shadow-sm"
+        >
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-5 h-5 text-gray-600">
             <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
           </svg>
         </Link>
         <div>
           <h1 className="text-2xl font-bold text-gray-800">Edit Product</h1>
-          <p className="text-gray-500 text-sm font-medium">Modify details to update the product in your store catalog.</p>
+          <p className="text-gray-500 text-sm font-medium">
+            Modify details to update the product in your store catalog.
+          </p>
         </div>
       </div>
 
       <form onSubmit={handleSubmit} className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        {/* Left Column - Main Details */}
+        {/* ── Left Column ── */}
         <div className="lg:col-span-2 space-y-6">
+          {/* Basic info */}
           <div className="bg-white p-6 md:p-8 rounded-2xl border border-gray-100 shadow-sm space-y-6">
             <div className="space-y-2">
               <label className="text-sm font-bold text-gray-700">Product Title*</label>
-              <input 
+              <input
                 required
                 name="title"
                 value={formData.title}
                 onChange={handleChange}
-                type="text" 
-                placeholder="e.g. Premium Cotton Panjabi" 
+                type="text"
+                placeholder="e.g. Premium Cotton Panjabi"
                 className="w-full bg-gray-50 border-none rounded-xl py-3 px-4 text-sm outline-none focus:ring-2 focus:ring-blue-100 transition-all font-medium"
               />
             </div>
 
             <div className="space-y-2">
               <label className="text-sm font-bold text-gray-700">Description</label>
-              <textarea 
+              <textarea
                 name="description"
                 value={formData.description}
                 onChange={handleChange}
                 rows={5}
-                placeholder="Write something about the product..." 
+                placeholder="Write something about the product..."
                 className="w-full bg-gray-50 border-none rounded-xl py-3 px-4 text-sm outline-none focus:ring-2 focus:ring-blue-100 transition-all font-medium resize-none"
-              ></textarea>
+              />
             </div>
 
             <div className="grid grid-cols-2 gap-6">
               <div className="space-y-2">
                 <label className="text-sm font-bold text-gray-700">Price (৳)*</label>
-                <input 
+                <input
                   required
                   name="price"
                   value={formData.price}
                   onChange={handleChange}
-                  type="number" 
-                  placeholder="0.00" 
+                  type="number"
+                  placeholder="0.00"
                   className="w-full bg-gray-50 border-none rounded-xl py-3 px-4 text-sm outline-none focus:ring-2 focus:ring-blue-100 transition-all font-bold"
                 />
               </div>
               <div className="space-y-2">
                 <label className="text-sm font-bold text-gray-700">Old Price (৳)</label>
-                <input 
+                <input
                   name="oldPrice"
                   value={formData.oldPrice}
                   onChange={handleChange}
-                  type="number" 
-                  placeholder="0.00" 
+                  type="number"
+                  placeholder="0.00"
                   className="w-full bg-gray-50 border-none rounded-xl py-3 px-4 text-sm outline-none focus:ring-2 focus:ring-blue-100 transition-all font-bold text-gray-400"
                 />
               </div>
             </div>
           </div>
 
-          <div className="bg-white p-6 md:p-8 rounded-2xl border border-gray-100 shadow-sm space-y-6">
-            <h2 className="font-bold text-gray-800 flex items-center gap-2">
-              <HugeiconsIcon icon={ImageAdd01Icon} size={18} className="text-gray-500" />
-              Media & Assets
-            </h2>
-            
-            <div className="space-y-2">
-              <label className="text-sm font-bold text-gray-700">Product Image*</label>
-              
-              <div 
-                onDragOver={handleDragOver}
-                onDragLeave={handleDragLeave}
-                onDrop={handleDrop}
-                className={`relative aspect-[1.8/1] rounded-2xl border-2 border-dashed transition-all flex flex-col items-center justify-center p-4 overflow-hidden bg-gray-50
-                  ${dragging ? 'border-[#1a80c2] bg-blue-50/30' : 'border-gray-200 hover:border-gray-300'}
-                `}
-              >
-                {formData.image ? (
-                  <>
-                    <img src={formData.image} alt="Preview" className="absolute inset-0 w-full h-full object-contain p-2 bg-white" />
-                    <div className="absolute inset-0 bg-black/40 opacity-0 hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
-                      <label className="bg-white/95 hover:bg-white text-gray-800 text-xs font-bold px-4 py-2 rounded-xl cursor-pointer shadow-md transition-all active:scale-95 select-none">
-                        Change Image
-                        <input type="file" accept="image/*" onChange={handleFileChange} className="hidden" />
-                      </label>
-                      <button 
-                        type="button"
-                        onClick={() => setFormData(prev => ({ ...prev, image: "" }))}
-                        className="bg-red-500 hover:bg-red-600 text-white text-xs font-bold px-4 py-2 rounded-xl shadow-md transition-all active:scale-95 select-none"
-                      >
-                        Remove
-                      </button>
-                    </div>
-                  </>
-                ) : (
-                  <div className="text-center space-y-2 flex flex-col items-center">
-                    {uploading ? (
-                      <div className="flex flex-col items-center gap-2">
-                        <div className="w-8 h-8 border-4 border-blue-100 border-t-[#1a80c2] rounded-full animate-spin" />
-                        <span className="text-xs font-bold text-gray-500">Uploading image...</span>
-                      </div>
-                    ) : (
-                      <>
-                        <div className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-gray-400">
-                          <HugeiconsIcon icon={ImageAdd01Icon} size={20} />
-                        </div>
-                        <div className="text-xs text-gray-500 font-medium">
-                          <label className="text-[#1a80c2] font-bold hover:underline cursor-pointer">
-                            Click to upload
-                            <input type="file" accept="image/*" onChange={handleFileChange} className="hidden" />
-                          </label>
-                          {" or drag & drop"}
-                        </div>
-                        <p className="text-[10px] text-gray-400 font-medium">Square or vertical layout works best</p>
-                      </>
-                    )}
+          {/* Media */}
+          <div className="bg-white p-6 md:p-8 rounded-2xl border border-gray-100 shadow-sm space-y-4">
+            <div>
+              <h2 className="font-bold text-gray-800 flex items-center gap-2 mb-1">
+                <svg className="w-4 h-4 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
+                </svg>
+                Media &amp; Assets
+              </h2>
+              {/* Info card — always visible at top */}
+              <div className="flex flex-col sm:flex-row gap-2 mt-2">
+                <div className="flex items-start gap-2 flex-1 bg-blue-50 border border-blue-100 rounded-xl px-3 py-2.5">
+                  <span className="text-base leading-none mt-0.5">⭐</span>
+                  <div>
+                    <p className="text-[11px] font-black text-[#1a80c2]">প্রথম ছবি = PRIMARY IMAGE</p>
+                    <p className="text-[10px] text-blue-500 font-medium mt-0.5">Product card, thumbnail ও সব জায়গায় এটি দেখাবে</p>
                   </div>
-                )}
+                </div>
+                <div className="flex items-start gap-2 flex-1 bg-gray-50 border border-gray-100 rounded-xl px-3 py-2.5">
+                  <span className="text-base leading-none mt-0.5">🖼️</span>
+                  <div>
+                    <p className="text-[11px] font-black text-gray-600">বাকি ছবি = GALLERY IMAGES</p>
+                    <p className="text-[10px] text-gray-400 font-medium mt-0.5">Product details পেজের গ্যালারিতে দেখাবে</p>
+                  </div>
+                </div>
               </div>
-
-              <input 
-                required
-                name="image"
-                value={formData.image}
-                onChange={handleChange}
-                type="text" 
-                placeholder="Or paste direct image URL here..." 
-                className="w-full bg-gray-50 border-none rounded-xl py-3 px-4 text-sm outline-none focus:ring-2 focus:ring-blue-100 transition-all font-medium"
-              />
             </div>
+
+            <MultiImageUploader
+              images={productImages}
+              onChange={setProductImages}
+              maxImages={10}
+            />
           </div>
         </div>
 
-        {/* Right Column - Organization */}
+        {/* ── Right Column ── */}
         <div className="space-y-6">
           <div className="bg-white p-6 md:p-8 rounded-2xl border border-gray-100 shadow-sm space-y-6">
             <h2 className="font-bold text-gray-800">Organization</h2>
-            
+
             <div className="space-y-2">
               <label className="text-sm font-bold text-gray-700">Category*</label>
-              <select 
+              <select
                 name="category"
                 value={formData.category}
                 onChange={handleChange}
                 className="w-full bg-gray-50 border-none rounded-xl py-3 px-4 text-sm outline-none focus:ring-2 focus:ring-blue-100 transition-all font-bold text-gray-700"
               >
-                {categories.map(cat => <option key={cat} value={cat}>{cat}</option>)}
+                {categories.map((cat) => (
+                  <option key={cat} value={cat}>{cat}</option>
+                ))}
               </select>
             </div>
 
             <div className="space-y-2">
               <label className="text-sm font-bold text-gray-700">Current Stock*</label>
-              <input 
+              <input
                 required
                 name="stock"
                 value={formData.stock}
                 onChange={handleChange}
-                type="number" 
-                placeholder="10" 
+                type="number"
+                placeholder="10"
                 className="w-full bg-gray-50 border-none rounded-xl py-3 px-4 text-sm outline-none focus:ring-2 focus:ring-blue-100 transition-all font-bold"
               />
             </div>
 
             <div className="flex items-center gap-3 pt-2">
-              <input 
+              <input
                 type="checkbox"
                 name="is_featured"
                 id="is_featured"
@@ -395,13 +324,51 @@ export default function EditProductClient({ id }: EditProductClientProps) {
             </div>
           </div>
 
+          {/* Image count summary */}
+          {productImages.length > 0 && (
+            <div className="bg-blue-50 border border-blue-100 rounded-2xl p-4 space-y-2">
+              <p className="text-xs font-bold text-[#1a80c2] flex items-center gap-1.5">
+                <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                {productImages.length} image{productImages.length !== 1 ? "s" : ""} saved
+              </p>
+              <div className="flex gap-1.5 flex-wrap">
+                {productImages.slice(0, 5).map((url, i) => (
+                  <div key={i} className="w-9 h-9 rounded-lg overflow-hidden border border-blue-100 relative">
+                    <img src={url} alt="" className="w-full h-full object-cover" />
+                    {i === 0 && (
+                      <div className="absolute inset-0 bg-[#1a80c2]/30 flex items-center justify-center">
+                        <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 24 24">
+                          <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                        </svg>
+                      </div>
+                    )}
+                  </div>
+                ))}
+                {productImages.length > 5 && (
+                  <div className="w-9 h-9 rounded-lg bg-blue-100 flex items-center justify-center">
+                    <span className="text-[9px] font-black text-[#1a80c2]">+{productImages.length - 5}</span>
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
+
           <div className="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm">
-            <button 
+            <button
               disabled={submitting}
               type="submit"
-              className="w-full bg-[#1a80c2] text-white py-4 rounded-xl font-bold text-sm shadow-lg shadow-blue-100 hover:bg-[#166ca5] transition-all disabled:opacity-50"
+              className="w-full bg-[#1a80c2] text-white py-4 rounded-xl font-bold text-sm shadow-lg shadow-blue-100 hover:bg-[#166ca5] transition-all disabled:opacity-50 flex items-center justify-center gap-2"
             >
-              {submitting ? "Updating..." : "Save Changes"}
+              {submitting ? (
+                <>
+                  <div className="w-4 h-4 border-2 border-white/40 border-t-white rounded-full animate-spin" />
+                  Updating...
+                </>
+              ) : (
+                "Save Changes"
+              )}
             </button>
           </div>
         </div>

@@ -217,7 +217,16 @@ export default function AdminProducts() {
                   <td className="px-6 py-4">
                     <div className="flex items-center gap-4">
                       <div className="w-12 h-12 bg-gray-50 rounded-lg overflow-hidden border border-gray-100 flex-shrink-0 relative">
-                        <Image src={product.image} alt={product.title} fill className="object-contain p-1" />
+                        <Image
+                          src={
+                            (Array.isArray(product.images) && product.images.length > 0)
+                              ? product.images[0]
+                              : product.image
+                          }
+                          alt={product.title}
+                          fill
+                          className="object-contain p-1"
+                        />
                       </div>
                       <div>
                         <p className="text-sm font-bold text-gray-800 line-clamp-1">{product.title}</p>
