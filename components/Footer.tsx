@@ -36,34 +36,41 @@ const Footer = () => {
               
               {/* Circular Social Icons */}
               <div className="flex gap-2.5 pt-2">
+                {/* Facebook */}
                 <Link 
-                  href="https://www.facebook.com/fabricofashions" 
+                  href="https://www.facebook.com/share/1L1BdJrBEc/" 
                   target="_blank"
-                  className="w-9 h-9 rounded-full bg-black flex items-center justify-center hover:bg-[#FF5722] hover:scale-105 active:scale-95 transition-all shadow-sm"
+                  className="w-9 h-9 rounded-full flex items-center justify-center hover:scale-110 active:scale-95 transition-all shadow-sm"
+                  style={{ backgroundColor: '#1877F2' }}
                   title="Facebook"
                 >
-                  <svg className="w-5 h-5 text-[#FF5722] hover:text-white transition-colors" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c4.56-.93 8-4.96 8-9.75z"/>
+                  <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
                   </svg>
                 </Link>
+                {/* WhatsApp */}
                 <Link 
-                  href="https://wa.me/8801534694518" 
+                  href="https://wa.me/8801940401901" 
                   target="_blank"
-                  className="w-9 h-9 rounded-full bg-black flex items-center justify-center hover:bg-[#FF5722] hover:scale-105 active:scale-95 transition-all shadow-sm"
+                  className="w-9 h-9 rounded-full flex items-center justify-center hover:scale-110 active:scale-95 transition-all shadow-sm"
+                  style={{ backgroundColor: '#25D366' }}
                   title="WhatsApp"
                 >
-                  <svg className="w-5 h-5 text-[#FF5722] hover:text-white transition-colors" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.724-1.455L0 24zm6.59-4.846c1.665.989 3.3 1.572 4.975 1.573 5.485.001 9.948-4.407 9.95-9.82 0-2.623-1.026-5.09-2.89-6.956-1.864-1.865-4.343-2.892-6.965-2.893-5.49 0-9.953 4.41-9.956 9.823-.001 1.838.485 3.635 1.408 5.215l-1.02 3.722 3.82-1.002zM17.15 14.5c-.282-.14-.1.35-.4-.5-.15-.3-.55-.45-.85-.5-1.044-.22-1.838-.9-2.2-.6-.4-.3-.85-.15-1.25.15a13.3 13.3 0 0 1-2.95-2.95c-.3-.4-.45-.85-.15-1.25.3-.4.82-.95.6-2.2-.05-.3-.2-.7-.5-.85-.85-.3-.36-.118-.5-.4-.14-.282-.5.15-.5.45A3.85 3.85 0 0 0 9 7.5c.28.8 1.62 3.32 4.2 4.48.55.25 1.15.4 1.7.4.45 0 .9-.05 1.25-.2.55-.25 1-.6 1.15-.9.15-.3.15-.55.1-.65-.05-.1-.2-.25-.3-.3z"/>
+                  <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+                    <path d="M12.05 2C6.495 2 2.003 6.484 2 12.03c-.001 1.853.49 3.66 1.42 5.256L2 22l4.846-1.387A10.02 10.02 0 0 0 12.05 22c5.557 0 10.048-4.485 10.05-10.03C22.102 6.49 17.61 2.002 12.05 2zm0 18.354a8.333 8.333 0 0 1-4.254-1.164l-.305-.181-3.155.904.899-3.09-.198-.317A8.294 8.294 0 0 1 3.698 12.03C3.7 7.503 7.514 3.698 12.05 3.698c2.198 0 4.263.856 5.816 2.41a8.172 8.172 0 0 1 2.407 5.82c-.002 4.528-3.816 8.426-8.223 8.426z"/>
                   </svg>
                 </Link>
+                {/* Messenger */}
                 <Link 
-                  href="https://m.me/fabricofashions" 
+                  href="https://www.facebook.com/share/1L1BdJrBEc/" 
                   target="_blank"
-                  className="w-9 h-9 rounded-full bg-black flex items-center justify-center hover:bg-[#FF5722] hover:scale-105 active:scale-95 transition-all shadow-sm"
-                  title="Messenger (Fabrico Fashions)"
+                  className="w-9 h-9 rounded-full flex items-center justify-center hover:scale-110 active:scale-95 transition-all shadow-sm"
+                  style={{ background: 'linear-gradient(45deg, #0099FF, #A033FF, #FF5C87)' }}
+                  title="Messenger"
                 >
-                  <svg className="w-5 h-5 text-[#FF5722] hover:text-white transition-colors" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M12 2C6.477 2 2 6.145 2 11.243a9.096 9.096 0 0 0 3.256 6.945V22l3.664-2.023A10.747 10.747 0 0 0 12 20.486c5.523 0 10-4.146 10-9.243S17.523 2 12 2zm1.096 11.968l-2.584-2.756-5.048 2.756 5.548-5.892 2.628 2.756 5.004-2.756-5.548 5.892z"/>
+                  <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 2C6.477 2 2 6.145 2 11.243a9.096 9.096 0 0 0 3.256 6.945V22l3.664-2.023A10.747 10.747 0 0 0 12 20.486c5.523 0 10-4.146 10-9.243S17.523 2 12 2zm1.096 11.968-2.584-2.756-5.048 2.756 5.548-5.892 2.628 2.756 5.004-2.756-5.548 5.892z"/>
                   </svg>
                 </Link>
               </div>
@@ -139,7 +146,7 @@ const Footer = () => {
       {/* Floating chat bubble on bottom right */}
       <div className="fixed bottom-28 md:bottom-6 right-6 z-40">
         <Link 
-          href="https://wa.me/8801534694518" 
+          href="https://wa.me/8801940401901" 
           target="_blank"
           className="w-12 h-12 md:w-14 md:h-14 bg-[#FF5722] hover:bg-[#E64A19] hover:scale-105 active:scale-95 transition-all text-white rounded-full flex items-center justify-center shadow-lg cursor-pointer"
           aria-label="Chat with Us"
