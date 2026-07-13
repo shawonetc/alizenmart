@@ -68,10 +68,9 @@ export default function CheckoutPage() {
     }
   }, [cart, totalPrice, totalItems]);
 
-  const subtotal = totalPrice;
+  const subtotal = totalPrice; // actual price customer pays
   const deliveryCharge = deliveryOption === "inside" ? 60 : 120;
-  const total = totalPrice + deliveryCharge;
-  const discount = cart.reduce((acc, item) => acc + (item.oldPrice ? (item.oldPrice - item.price) * item.quantity : 0), 0);
+  const total = subtotal + deliveryCharge;
 
   const handlePlaceOrder = async () => {
     if (cart.length === 0) {
@@ -422,10 +421,7 @@ export default function CheckoutPage() {
                       <span className="text-gray-600">সাব টোটাল:</span>
                       <span className="font-bold text-gray-800">৳ {subtotal}</span>
                     </div>
-                    <div className="flex justify-between text-sm">
-                      <span className="text-gray-600">ডিসকাউন্ট:</span>
-                      <span className="font-bold text-gray-800">-৳ {discount}</span>
-                    </div>
+
                     <div className="flex justify-between text-sm">
                       <span className="text-gray-600">ডেলিভারি চার্জ:</span>
                       <span className="font-bold text-gray-800">৳ {deliveryCharge}</span>

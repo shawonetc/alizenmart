@@ -24,7 +24,9 @@ const fallbackProducts = [
 ];
 
 const generateSlug = (str: string) => {
-  return str
+  // Take only first 5 words to keep URLs short
+  const words = str.trim().split(/\s+/).slice(0, 5).join(' ');
+  return words
     .toLowerCase()
     .replace(/\s+/g, '-')
     .replace(/[^a-z0-9\u0980-\u09FF-]+/g, '')
