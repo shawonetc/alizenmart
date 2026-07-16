@@ -45,6 +45,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         "blackrisebd@gmail.com",
         "admin@1stopdokan.com",
         "1stopdokan@gmail.com",
+        "stopdokan30@gmail.com",
       ];
       const email = String(currentUser.email || "").toLowerCase();
       const isWhitelisted = 
