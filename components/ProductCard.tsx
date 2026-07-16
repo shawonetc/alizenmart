@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { HugeiconsIcon } from "@hugeicons/react";
 import { ShoppingBasket01Icon } from "@hugeicons/core-free-icons";
 
@@ -20,6 +21,7 @@ interface ProductCardProps {
 const ProductCard = ({ title, price, oldPrice, image, slug, priority }: ProductCardProps) => {
   const router = useRouter();
   const { addToCart } = useCart();
+  const [cartHovered, setCartHovered] = useState(false);
 
   const handleOrderNow = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -88,12 +90,14 @@ const ProductCard = ({ title, price, oldPrice, image, slug, priority }: ProductC
           {/* Cart Button */}
           <button
             onClick={handleAddToCart}
-            className="flex-shrink-0 w-8 h-8 md:w-10 md:h-10 border border-[#FF5722] rounded-md md:rounded-lg flex items-center justify-center hover:bg-orange-50 transition-colors bg-white"
+            className="flex-shrink-0 w-8 h-8 md:w-10 md:h-10 border border-[#008080] rounded-md md:rounded-lg flex items-center justify-center hover:border-[#FF5722] hover:bg-orange-50 transition-colors bg-white group"
+            onMouseEnter={() => setCartHovered(true)}
+            onMouseLeave={() => setCartHovered(false)}
           >
             <HugeiconsIcon
               icon={ShoppingBasket01Icon}
               size={20}
-              color="#FF5722"
+              color={cartHovered ? "#FF5722" : "#008080"}
               className="w-4 h-4 md:w-5 md:h-5"
               strokeWidth={1.5}
             />
@@ -102,7 +106,7 @@ const ProductCard = ({ title, price, oldPrice, image, slug, priority }: ProductC
           {/* Order Button */}
           <button
             onClick={handleOrderNow}
-            className="flex-1 bg-[#FF5722] text-white h-8 md:h-10 rounded-md md:rounded-lg text-[10px] md:text-sm font-bold hover:bg-[#E64A19] transition-all active:scale-[0.98] shadow-sm flex items-center justify-center leading-none"
+            className="flex-1 bg-[#008080] text-white h-8 md:h-10 rounded-md md:rounded-lg text-[10px] md:text-sm font-bold hover:bg-[#FF5722] transition-all active:scale-[0.98] shadow-sm flex items-center justify-center leading-none"
           >
             অর্ডার করুন
           </button>
