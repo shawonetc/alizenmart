@@ -29,6 +29,7 @@ export default function CheckoutPage() {
   // Success Modal state
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [placedOrderId, setPlacedOrderId] = useState("");
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   // Error Modal state
   const [errorModal, setErrorModal] = useState({ show: false, message: "", title: "সতর্কতা" });
@@ -42,6 +43,7 @@ export default function CheckoutPage() {
     const getUserData = async () => {
       const { data: { user } } = await supabase.auth.getUser();
       if (user) {
+        setIsLoggedIn(true);
         setFullName(user.user_metadata?.full_name || "");
         setPhone(user.user_metadata?.mobile_number || "");
         setAddress(user.user_metadata?.address || "");
@@ -95,14 +97,12 @@ export default function CheckoutPage() {
         customer_name: fullName,
         phone: cleanedPhone,
         address: address,
-        total: total,            // Matches admin panel 'total'
-        total_amount: total,     // Matches user dashboard 'total_amount'
+        total: total,
         status: "Pending",
         payment_method: paymentMethod,
         bkash_number: paymentMethod === "bkash" ? bkashNumber : null,
         transaction_id: paymentMethod === "bkash" ? transactionId : null,
-        notes: orderNote,
-        items: cart,             // Stores JSON list of items ordered
+        items: cart,
       };
 
       const { data, error } = await supabase
@@ -113,18 +113,10 @@ export default function CheckoutPage() {
       let finalOrderId = "ORD-" + Math.floor(100000 + Math.random() * 900000);
 
       if (error) {
-        console.warn("Supabase order insert failed, falling back to localStorage:", error);
-
-        // Create local fallback order object
-        const localOrder = {
-          id: finalOrderId,
-          ...orderPayload,
-          created_at: new Date().toISOString()
-        };
-
-        const existingLocalOrders = JSON.parse(localStorage.getItem("local_orders") || "[]");
-        existingLocalOrders.unshift(localOrder);
-        localStorage.setItem("local_orders", JSON.stringify(existingLocalOrders));
+        console.error("Supabase order insert failed:", error);
+        // Show meaningful error to user
+        showError(`অর্ডার সংরক্ষণ করতে সমস্যা হয়েছে: ${error.message}`);
+        return;
       } else if (data && data[0]) {
         finalOrderId = String(data[0].id).substring(0, 8).toUpperCase();
       }
@@ -479,7 +471,11 @@ export default function CheckoutPage() {
               <button
                 onClick={() => {
                   setShowSuccessModal(false);
-                  router.push("/account");
+                  if (isLoggedIn) {
+                    router.push("/account");
+                  } else {
+                    router.push(`/track-order?id=${placedOrderId}`);
+                  }
                 }}
                 className="w-full bg-[#FF5722] hover:bg-[#E64A19] text-white py-3 rounded-lg font-bold text-sm shadow-md shadow-orange-100 transition-all active:scale-[0.98] flex items-center justify-center gap-2"
               >

@@ -188,7 +188,7 @@ export default function AccountPage() {
                              <span className="text-xs text-gray-400">{new Date(order.created_at).toLocaleDateString()}</span>
                            </div>
                            <div className="flex justify-between items-center">
-                             <span className="text-sm font-bold text-orange-600">৳ {order.total_amount}</span>
+                             <span className="text-sm font-bold text-orange-600">৳ {order.total || order.total_amount || 0}</span>
                              <span className="text-[10px] uppercase font-bold px-2 py-1 bg-blue-50 text-blue-600 rounded-full">{order.status}</span>
                            </div>
                         </div>

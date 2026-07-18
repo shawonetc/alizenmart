@@ -11,6 +11,7 @@ export default function AdminOrders() {
   const [expandedOrderId, setExpandedOrderId] = useState<any>(null);
   const [searchQuery, setSearchQuery] = useState("");
   const [statusFilter, setStatusFilter] = useState("All");
+  const [fetchError, setFetchError] = useState<string | null>(null);
 
   useEffect(() => {
     fetchOrders();
@@ -18,6 +19,7 @@ export default function AdminOrders() {
 
   const fetchOrders = async () => {
     setLoading(true);
+    setFetchError(null);
     const { data, error } = await supabase
       .from('orders')
       .select('*')
@@ -25,12 +27,8 @@ export default function AdminOrders() {
 
     if (error) {
       console.error('Error fetching orders:', error);
-      // Fallback static data in case table is unreachable
-      setOrders([
-        { id: "ORD-9821", customer_name: "Hasan Mahmud", phone: "01712345678", total: 1520, status: "Delivered", created_at: "2026-05-16T10:00:00Z", payment_method: "cod", address: "Dhaka, Bangladesh", items: [{ title: "Airpods Case", price: 160, quantity: 2, image: "/airpods_case.png" }] },
-        { id: "ORD-9820", customer_name: "Farhana Akter", phone: "01812345678", total: 2990, status: "Processing", created_at: "2026-05-16T09:30:00Z", payment_method: "bkash", bkash_number: "01812345678", transaction_id: "TRX884920", address: "Mirpur, Dhaka", items: [{ title: "Soft Katan Panjabi", price: 980, quantity: 3, image: "/soft_katan_panjabi.png" }] },
-        { id: "ORD-9819", customer_name: "Rakibul Islam", phone: "01912345678", total: 980, status: "Shipped", created_at: "2026-05-15T15:45:00Z", payment_method: "cod", address: "Chittagong, Bangladesh", items: [{ title: "Fresh Dates Combo", price: 980, quantity: 1, image: "/fresh_dates.png" }] },
-      ]);
+      setFetchError(error.message);
+      setOrders([]);
     } else if (data) {
       setOrders(data);
     }
@@ -72,6 +70,20 @@ export default function AdminOrders() {
           🔄 Refresh Orders
         </button>
       </div>
+
+      {/* Error Banner */}
+      {fetchError && (
+        <div className="bg-red-50 border border-red-200 rounded-xl p-4 flex items-start gap-3">
+          <span className="text-red-500 text-lg">⚠️</span>
+          <div>
+            <p className="text-sm font-bold text-red-700">Supabase Error</p>
+            <p className="text-xs text-red-600 mt-0.5">{fetchError}</p>
+            <p className="text-xs text-red-500 mt-2 font-medium">
+              Fix: Run the SQL script in Supabase Dashboard → SQL Editor to fix RLS policies.
+            </p>
+          </div>
+        </div>
+      )}
 
       {/* Order List */}
       <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
