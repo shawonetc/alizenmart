@@ -29,6 +29,7 @@ export default function CheckoutPage() {
   // Success Modal state
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [placedOrderId, setPlacedOrderId] = useState("");
+  const [placedOrderTotal, setPlacedOrderTotal] = useState(0);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   // Error Modal state
@@ -122,6 +123,7 @@ export default function CheckoutPage() {
       }
 
       setPlacedOrderId(finalOrderId);
+      setPlacedOrderTotal(total);
       setShowSuccessModal(true);
       clearCart();
     } catch (error: any) {
@@ -462,7 +464,7 @@ export default function CheckoutPage() {
               </div>
               <div className="flex justify-between">
                 <span className="text-gray-500">সর্বমোট মূল্য:</span>
-                <span className="font-bold text-green-600">৳ {total}</span>
+                <span className="font-bold text-green-600">৳ {placedOrderTotal}</span>
               </div>
             </div>
 
