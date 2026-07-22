@@ -196,11 +196,52 @@ export default function HomeClient({ initialProducts, initialSettings }: HomeCli
 
         {/* Campaigns Banner */}
         <section className="container-custom mb-6 md:mb-8">
-          <div className="relative h-32 md:h-40 rounded-lg md:rounded-md overflow-hidden bg-[#1a80c2] flex items-center justify-center text-white px-4">
-            <div className="text-center">
-              <h2 className="text-xl md:text-3xl font-bold mb-1 md:mb-2 italic uppercase tracking-tighter">MEGA CAMPAIGN</h2>
-              <p className="text-xs md:text-lg opacity-90">Enjoy up to 80% discount on all products!</p>
-              <button className="mt-3 md:mt-4 bg-white text-[#1a80c2] px-6 md:px-8 py-1.5 md:py-2 rounded-full text-xs md:text-base font-bold hover:shadow-lg transition-shadow">Shop Now</button>
+          <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-[#1A80C2] via-[#2392d7] to-[#0f679e] p-6 md:p-8 text-white shadow-xl hover:shadow-[0_20px_50px_rgba(26,128,194,0.3)] transition-all duration-500 group">
+            
+            {/* Background elements */}
+            <div className="absolute top-0 right-0 -mt-8 -mr-8 w-48 h-48 rounded-full bg-white/10 blur-2xl group-hover:scale-125 transition-transform duration-700 pointer-events-none" />
+            <div className="absolute bottom-0 left-0 -mb-8 -ml-8 w-48 h-48 rounded-full bg-white/10 blur-2xl group-hover:scale-125 transition-transform duration-700 pointer-events-none" />
+            <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-72 h-72 rounded-full bg-blue-400/20 blur-3xl pointer-events-none" />
+
+            <div className="relative flex flex-col md:flex-row items-center justify-between gap-6 z-10">
+              
+              {/* Content text */}
+              <div className="text-center md:text-left">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/15 backdrop-blur-md text-xs font-semibold tracking-wider uppercase mb-3 animate-pulse border border-white/10">
+                  <span className="w-2 h-2 rounded-full bg-yellow-400" />
+                  Limited Time Offer
+                </div>
+                <h2 className="text-3xl md:text-5xl font-black italic uppercase tracking-tight mb-2 bg-gradient-to-b from-white to-white/80 bg-clip-text text-transparent drop-shadow-sm">
+                  MEGA CAMPAIGN
+                </h2>
+                <p className="text-sm md:text-xl font-medium text-white/95 leading-relaxed">
+                  Enjoy up to <span className="font-bold text-yellow-300 underline decoration-wavy decoration-2">80% discount</span> on all products!
+                </p>
+              </div>
+
+              {/* Action and Tag */}
+              <div className="flex flex-col sm:flex-row items-center gap-4 md:gap-6">
+                
+                {/* Floating Tag */}
+                <div className="relative flex items-center justify-center w-24 h-24 rounded-full bg-yellow-300 text-gray-900 font-extrabold text-sm uppercase tracking-tight shadow-lg border-4 border-white rotate-[-6deg] group-hover:rotate-[6deg] group-hover:scale-105 transition-all duration-500 shrink-0">
+                  <div className="text-center leading-none">
+                    <span className="block text-[11px] font-medium opacity-80 uppercase">Up To</span>
+                    <span className="block text-2xl font-black">80%</span>
+                    <span className="block text-[10px] font-bold">OFF</span>
+                  </div>
+                  {/* Tag shadow glow */}
+                  <div className="absolute -inset-1 rounded-full bg-yellow-300/30 blur opacity-70 group-hover:opacity-100 transition-opacity -z-10" />
+                </div>
+
+                {/* Button */}
+                <Link href="/flash-sale" className="bg-white text-gray-950 px-8 py-3.5 rounded-xl text-sm md:text-base font-bold shadow-lg hover:shadow-xl hover:bg-yellow-300 hover:text-gray-900 group-hover:scale-105 active:scale-95 transition-all duration-300 flex items-center gap-2 shrink-0">
+                  <span>Shop Now</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-4 h-4 group-hover:translate-x-1 transition-transform">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+                  </svg>
+                </Link>
+
+              </div>
             </div>
           </div>
         </section>
