@@ -130,7 +130,7 @@ const Header = () => {
           <Link href="/" className="flex items-center" onClick={() => setIsDrawerOpen(false)}>
             <div className="relative h-12 w-12">
               <Image
-                src="/logo/logo4.png"
+                src="/logo/logo3.jpeg"
                 alt="1stopDokan Logo"
                 fill
                 sizes="48px"
@@ -200,7 +200,7 @@ const Header = () => {
             <Link href="/" className="flex-shrink-0 md:flex-none absolute left-1/2 -translate-x-1/2 md:relative md:left-0 md:translate-x-0">
               <div className="relative h-12 md:h-16 w-12 md:w-16 flex items-center">
                 <Image
-                  src="/logo/logo4.png"
+                  src="/logo/logo3.jpeg"
                   alt="1stopDokan Logo"
                   fill
                   sizes="(max-width: 768px) 48px, 64px"
