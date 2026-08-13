@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://1stopdokan.com"),
   title: {
-    default: "1stopDokan - Best Premium Fashion & Lifestyle in Bangladesh",
+    default: "1Stop Dokan – আপনার দৈনন্দিন কেনাকাটার একমাত্র ঠিকানা!",
     template: "%s | 1stopDokan",
   },
   description: "Explore 1stopDokan for premium clothing, high-quality panjabi, embroidery designs, gadgets, smart electronics, home & lifestyle products in Bangladesh.",
@@ -39,7 +39,7 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: "https://1stopdokan.com",
     siteName: "1stopDokan",
-    title: "1stopDokan - Best Premium Fashion & Lifestyle in Bangladesh",
+    title: "1Stop Dokan – আপনার দৈনন্দিন কেনাকাটার একমাত্র ঠিকানা!",
     description: "Explore 1stopDokan for premium clothing, high-quality panjabi, embroidery designs, gadgets, and lifestyle items in Bangladesh.",
     images: [
       {
@@ -52,7 +52,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "1stopDokan - Best Premium Fashion & Lifestyle in Bangladesh",
+    title: "1Stop Dokan – আপনার দৈনন্দিন কেনাকাটার একমাত্র ঠিকানা!",
     description: "Explore 1stopDokan for premium clothing, high-quality panjabi, embroidery designs, gadgets, and lifestyle items.",
     images: ["/og-image.png"],
   },

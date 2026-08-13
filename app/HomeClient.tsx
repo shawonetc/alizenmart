@@ -192,16 +192,16 @@ export default function HomeClient({ initialProducts, initialSettings }: HomeCli
           </div>
         </section>
 
-        <FeaturedCategories />
+        {/* <FeaturedCategories /> */}
 
         {/* Campaigns Banner */}
         <section className="container-custom mb-6 md:mb-8">
-          <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-[#1A80C2] via-[#2392d7] to-[#0f679e] p-6 md:p-8 text-white shadow-xl hover:shadow-[0_20px_50px_rgba(26,128,194,0.3)] transition-all duration-500 group">
+          <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-[#008080] via-[#00a3a3] to-[#006d6d] p-6 md:p-8 text-white shadow-xl hover:shadow-[0_20px_50px_rgba(0,128,128,0.3)] transition-all duration-500 group">
             
             {/* Background elements */}
             <div className="absolute top-0 right-0 -mt-8 -mr-8 w-48 h-48 rounded-full bg-white/10 blur-2xl group-hover:scale-125 transition-transform duration-700 pointer-events-none" />
             <div className="absolute bottom-0 left-0 -mb-8 -ml-8 w-48 h-48 rounded-full bg-white/10 blur-2xl group-hover:scale-125 transition-transform duration-700 pointer-events-none" />
-            <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-72 h-72 rounded-full bg-blue-400/20 blur-3xl pointer-events-none" />
+            <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-72 h-72 rounded-full bg-teal-400/20 blur-3xl pointer-events-none" />
 
             <div className="relative flex flex-col md:flex-row items-center justify-between gap-6 z-10">
               

@@ -4,7 +4,7 @@ import HomeClient from "../HomeClient";
 
 // Metadata for homepage
 export const metadata = {
-  title: "1stopDokan - Best Premium Fashion & Lifestyle in Bangladesh",
+  title: "1Stop Dokan – আপনার দৈনন্দিন কেনাকাটার একমাত্র ঠিকানা!",
   description: "Explore 1stopDokan for premium clothing, high-quality panjabi, embroidery designs, gadgets, smart electronics, home & lifestyle products in Bangladesh.",
 };
 

@@ -130,7 +130,7 @@ const Header = () => {
           <Link href="/" className="flex items-center" onClick={() => setIsDrawerOpen(false)}>
             <div className="relative h-12 w-12">
               <Image
-                src="/logo/logo3.jpeg"
+                src="/logo/logo4.png"
                 alt="1stopDokan Logo"
                 fill
                 sizes="48px"
@@ -183,8 +183,8 @@ const Header = () => {
       </div>
 
       {/* Main Header Bar */}
-      <div className="bg-white border-b border-gray-100 py-2 md:py-3 shadow-sm transition-all duration-300">
-        <div className="container-custom flex flex-col gap-3 md:gap-4">
+      <div className="bg-white border-b border-gray-100 py-1.5 md:py-2 shadow-sm transition-all duration-300">
+        <div className="container-custom flex flex-col gap-3 md:gap-0">
           <div className="flex items-center justify-between gap-4">
             {/* Mobile Menu Icon */}
             <button
@@ -200,7 +200,7 @@ const Header = () => {
             <Link href="/" className="flex-shrink-0 md:flex-none absolute left-1/2 -translate-x-1/2 md:relative md:left-0 md:translate-x-0">
               <div className="relative h-12 md:h-16 w-12 md:w-16 flex items-center">
                 <Image
-                  src="/logo/logo3.jpeg"
+                  src="/logo/logo4.png"
                   alt="1stopDokan Logo"
                   fill
                   sizes="(max-width: 768px) 48px, 64px"
@@ -292,7 +292,7 @@ const Header = () => {
 
       {/* Desktop Sub Navigation */}
       <div className="hidden md:block bg-white border-b border-gray-100 shadow-sm">
-        <div className="container-custom max-w-[1000px] relative text-[14px] font-bold text-gray-700 select-none flex items-center gap-4">
+        <div className="container-custom relative text-[14px] font-bold text-gray-700 select-none flex items-center gap-4">
           <style>{`
             .no-scrollbar::-webkit-scrollbar {
               display: none;
@@ -305,7 +305,7 @@ const Header = () => {
 
           <Link
             href="/"
-            className="hover:text-[#FF5722] text-[#0B5A70] flex items-center transition-colors py-3 flex-shrink-0"
+            className="hover:text-[#FF5722] text-[#0B5A70] flex items-center transition-colors py-2 flex-shrink-0"
           >
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.2} stroke="currentColor" className="w-5 h-5">
               <path strokeLinecap="round" strokeLinejoin="round" d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
@@ -319,7 +319,7 @@ const Header = () => {
             onMouseMove={handleMouseMove}
             onMouseUp={handleMouseUpOrLeave}
             onMouseLeave={handleMouseUpOrLeave}
-            className="flex-1 flex items-center gap-8 py-3 overflow-x-auto no-scrollbar cursor-grab active:cursor-grabbing select-none whitespace-nowrap"
+            className="flex-1 flex items-center gap-8 py-2 overflow-x-auto no-scrollbar cursor-grab active:cursor-grabbing select-none whitespace-nowrap"
             style={{ scrollBehavior: isDragging ? "auto" : "smooth" }}
           >
             {rootCategories.map((cat, index) => {
